@@ -1,0 +1,15 @@
+D:\GitHub\2ndWeek_TextRPG\FirstWeek\SecondProject\bin\Debug\net9.0\SecondProject.exe
+D:\GitHub\2ndWeek_TextRPG\FirstWeek\SecondProject\bin\Debug\net9.0\SecondProject.deps.json
+D:\GitHub\2ndWeek_TextRPG\FirstWeek\SecondProject\bin\Debug\net9.0\SecondProject.runtimeconfig.json
+D:\GitHub\2ndWeek_TextRPG\FirstWeek\SecondProject\bin\Debug\net9.0\SecondProject.dll
+D:\GitHub\2ndWeek_TextRPG\FirstWeek\SecondProject\bin\Debug\net9.0\SecondProject.pdb
+D:\GitHub\2ndWeek_TextRPG\FirstWeek\SecondProject\obj\Debug\net9.0\SecondProject.GeneratedMSBuildEditorConfig.editorconfig
+D:\GitHub\2ndWeek_TextRPG\FirstWeek\SecondProject\obj\Debug\net9.0\SecondProject.AssemblyInfoInputs.cache
+D:\GitHub\2ndWeek_TextRPG\FirstWeek\SecondProject\obj\Debug\net9.0\SecondProject.AssemblyInfo.cs
+D:\GitHub\2ndWeek_TextRPG\FirstWeek\SecondProject\obj\Debug\net9.0\SecondProject.csproj.CoreCompileInputs.cache
+D:\GitHub\2ndWeek_TextRPG\FirstWeek\SecondProject\obj\Debug\net9.0\SecondProject.sourcelink.json
+D:\GitHub\2ndWeek_TextRPG\FirstWeek\SecondProject\obj\Debug\net9.0\SecondProject.dll
+D:\GitHub\2ndWeek_TextRPG\FirstWeek\SecondProject\obj\Debug\net9.0\refint\SecondProject.dll
+D:\GitHub\2ndWeek_TextRPG\FirstWeek\SecondProject\obj\Debug\net9.0\SecondProject.pdb
+D:\GitHub\2ndWeek_TextRPG\FirstWeek\SecondProject\obj\Debug\net9.0\SecondProject.genruntimeconfig.cache
+D:\GitHub\2ndWeek_TextRPG\FirstWeek\SecondProject\obj\Debug\net9.0\ref\SecondProject.dll
