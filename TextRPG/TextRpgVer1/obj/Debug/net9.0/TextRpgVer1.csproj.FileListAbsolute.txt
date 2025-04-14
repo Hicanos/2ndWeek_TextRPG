@@ -1,0 +1,15 @@
+D:\GitHub\2ndWeek_TextRPG\TextRPG\TextRpgVer1\bin\Debug\net9.0\TextRpgVer1.exe
+D:\GitHub\2ndWeek_TextRPG\TextRPG\TextRpgVer1\bin\Debug\net9.0\TextRpgVer1.deps.json
+D:\GitHub\2ndWeek_TextRPG\TextRPG\TextRpgVer1\bin\Debug\net9.0\TextRpgVer1.runtimeconfig.json
+D:\GitHub\2ndWeek_TextRPG\TextRPG\TextRpgVer1\bin\Debug\net9.0\TextRpgVer1.dll
+D:\GitHub\2ndWeek_TextRPG\TextRPG\TextRpgVer1\bin\Debug\net9.0\TextRpgVer1.pdb
+D:\GitHub\2ndWeek_TextRPG\TextRPG\TextRpgVer1\obj\Debug\net9.0\TextRpgVer1.GeneratedMSBuildEditorConfig.editorconfig
+D:\GitHub\2ndWeek_TextRPG\TextRPG\TextRpgVer1\obj\Debug\net9.0\TextRpgVer1.AssemblyInfoInputs.cache
+D:\GitHub\2ndWeek_TextRPG\TextRPG\TextRpgVer1\obj\Debug\net9.0\TextRpgVer1.AssemblyInfo.cs
+D:\GitHub\2ndWeek_TextRPG\TextRPG\TextRpgVer1\obj\Debug\net9.0\TextRpgVer1.csproj.CoreCompileInputs.cache
+D:\GitHub\2ndWeek_TextRPG\TextRPG\TextRpgVer1\obj\Debug\net9.0\TextRpgVer1.sourcelink.json
+D:\GitHub\2ndWeek_TextRPG\TextRPG\TextRpgVer1\obj\Debug\net9.0\TextRpgVer1.dll
+D:\GitHub\2ndWeek_TextRPG\TextRPG\TextRpgVer1\obj\Debug\net9.0\refint\TextRpgVer1.dll
+D:\GitHub\2ndWeek_TextRPG\TextRPG\TextRpgVer1\obj\Debug\net9.0\TextRpgVer1.pdb
+D:\GitHub\2ndWeek_TextRPG\TextRPG\TextRpgVer1\obj\Debug\net9.0\TextRpgVer1.genruntimeconfig.cache
+D:\GitHub\2ndWeek_TextRPG\TextRPG\TextRpgVer1\obj\Debug\net9.0\ref\TextRpgVer1.dll

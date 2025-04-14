@@ -35,24 +35,50 @@
         {
             //컴퓨터 수 지정
             int ComNumber = new Random().Next(1, 101);
-            int count = 5;
+            int count = 10;
 
+            Console.WriteLine("맞춰야 할 수가 정해졌습니다!");
+            Console.WriteLine(count + "번의 기회가 있습니다.");
             Console.WriteLine("1~100 사이의 숫자를 입력하세요.");
-            bool isNumber = int.TryParse(Console.ReadLine(), out int number);
             
-            if(!isNumber)
+            do 
             {
-                Console.WriteLine("잘못된 입력입니다.");
-                MatchNumber(); return;
-            }
-            else if (number < 1 || number > 100)
+                bool isNumber = int.TryParse(Console.ReadLine(), out int number);
+
+                if (!isNumber)
+                {
+                    Console.WriteLine("숫자를 입력하세요.");
+                    continue;
+                }
+                else if (number < 1 || number > 100)
+                {
+                    Console.WriteLine("1~100 사이의 숫자를 입력하세요.");
+                    continue;
+                }
+                else if (number == ComNumber)
+                {
+                    Console.WriteLine("정답입니다!");
+                    break;
+                }
+                else if (number > ComNumber)
+                {
+                    Console.WriteLine("입력한 숫자가 더 큽니다.");
+                }
+                else
+                {
+                    Console.WriteLine("입력한 숫자가 더 작습니다.");
+                }
+
+                count--;
+                Console.WriteLine($"남은 기회: {count}");
+
+            } while (count > 0);
+
+            if (count == 0)
             {
-
+                Console.WriteLine("기회를 모두 소진했습니다.");
+                Console.WriteLine($"정답은 {ComNumber}입니다.");
             }
-
-                
-
-            
         }
 
         static void TicTacToe()
