@@ -1,0 +1,15 @@
+D:\GitHub\2ndWeek_TextRPG\FirstWeek\ConsoleApp1\bin\Debug\net9.0\ConsoleApp1.exe
+D:\GitHub\2ndWeek_TextRPG\FirstWeek\ConsoleApp1\bin\Debug\net9.0\ConsoleApp1.deps.json
+D:\GitHub\2ndWeek_TextRPG\FirstWeek\ConsoleApp1\bin\Debug\net9.0\ConsoleApp1.runtimeconfig.json
+D:\GitHub\2ndWeek_TextRPG\FirstWeek\ConsoleApp1\bin\Debug\net9.0\ConsoleApp1.dll
+D:\GitHub\2ndWeek_TextRPG\FirstWeek\ConsoleApp1\bin\Debug\net9.0\ConsoleApp1.pdb
+D:\GitHub\2ndWeek_TextRPG\FirstWeek\ConsoleApp1\obj\Debug\net9.0\ConsoleApp1.GeneratedMSBuildEditorConfig.editorconfig
+D:\GitHub\2ndWeek_TextRPG\FirstWeek\ConsoleApp1\obj\Debug\net9.0\ConsoleApp1.AssemblyInfoInputs.cache
+D:\GitHub\2ndWeek_TextRPG\FirstWeek\ConsoleApp1\obj\Debug\net9.0\ConsoleApp1.AssemblyInfo.cs
+D:\GitHub\2ndWeek_TextRPG\FirstWeek\ConsoleApp1\obj\Debug\net9.0\ConsoleApp1.csproj.CoreCompileInputs.cache
+D:\GitHub\2ndWeek_TextRPG\FirstWeek\ConsoleApp1\obj\Debug\net9.0\ConsoleApp1.sourcelink.json
+D:\GitHub\2ndWeek_TextRPG\FirstWeek\ConsoleApp1\obj\Debug\net9.0\ConsoleApp1.dll
+D:\GitHub\2ndWeek_TextRPG\FirstWeek\ConsoleApp1\obj\Debug\net9.0\refint\ConsoleApp1.dll
+D:\GitHub\2ndWeek_TextRPG\FirstWeek\ConsoleApp1\obj\Debug\net9.0\ConsoleApp1.pdb
+D:\GitHub\2ndWeek_TextRPG\FirstWeek\ConsoleApp1\obj\Debug\net9.0\ConsoleApp1.genruntimeconfig.cache
+D:\GitHub\2ndWeek_TextRPG\FirstWeek\ConsoleApp1\obj\Debug\net9.0\ref\ConsoleApp1.dll
