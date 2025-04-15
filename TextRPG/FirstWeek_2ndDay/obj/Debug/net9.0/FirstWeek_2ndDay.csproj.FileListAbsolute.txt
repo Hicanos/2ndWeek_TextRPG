@@ -1,0 +1,15 @@
+D:\GitHub\2ndWeek_TextRPG\TextRPG\FirstWeek_2ndDay\bin\Debug\net9.0\FirstWeek_2ndDay.exe
+D:\GitHub\2ndWeek_TextRPG\TextRPG\FirstWeek_2ndDay\bin\Debug\net9.0\FirstWeek_2ndDay.deps.json
+D:\GitHub\2ndWeek_TextRPG\TextRPG\FirstWeek_2ndDay\bin\Debug\net9.0\FirstWeek_2ndDay.runtimeconfig.json
+D:\GitHub\2ndWeek_TextRPG\TextRPG\FirstWeek_2ndDay\bin\Debug\net9.0\FirstWeek_2ndDay.dll
+D:\GitHub\2ndWeek_TextRPG\TextRPG\FirstWeek_2ndDay\bin\Debug\net9.0\FirstWeek_2ndDay.pdb
+D:\GitHub\2ndWeek_TextRPG\TextRPG\FirstWeek_2ndDay\obj\Debug\net9.0\FirstWeek_2ndDay.GeneratedMSBuildEditorConfig.editorconfig
+D:\GitHub\2ndWeek_TextRPG\TextRPG\FirstWeek_2ndDay\obj\Debug\net9.0\FirstWeek_2ndDay.AssemblyInfoInputs.cache
+D:\GitHub\2ndWeek_TextRPG\TextRPG\FirstWeek_2ndDay\obj\Debug\net9.0\FirstWeek_2ndDay.AssemblyInfo.cs
+D:\GitHub\2ndWeek_TextRPG\TextRPG\FirstWeek_2ndDay\obj\Debug\net9.0\FirstWeek_2ndDay.csproj.CoreCompileInputs.cache
+D:\GitHub\2ndWeek_TextRPG\TextRPG\FirstWeek_2ndDay\obj\Debug\net9.0\FirstWeek_2ndDay.sourcelink.json
+D:\GitHub\2ndWeek_TextRPG\TextRPG\FirstWeek_2ndDay\obj\Debug\net9.0\FirstWeek_2ndDay.dll
+D:\GitHub\2ndWeek_TextRPG\TextRPG\FirstWeek_2ndDay\obj\Debug\net9.0\refint\FirstWeek_2ndDay.dll
+D:\GitHub\2ndWeek_TextRPG\TextRPG\FirstWeek_2ndDay\obj\Debug\net9.0\FirstWeek_2ndDay.pdb
+D:\GitHub\2ndWeek_TextRPG\TextRPG\FirstWeek_2ndDay\obj\Debug\net9.0\FirstWeek_2ndDay.genruntimeconfig.cache
+D:\GitHub\2ndWeek_TextRPG\TextRPG\FirstWeek_2ndDay\obj\Debug\net9.0\ref\FirstWeek_2ndDay.dll
