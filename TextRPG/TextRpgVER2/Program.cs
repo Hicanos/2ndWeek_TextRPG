@@ -14,17 +14,20 @@ namespace TextRpgVER2
         //플레이어 스탯 초기화
         class Player
         {
-            //레벨, 이름, 직업, 공격력, 방어력, 체력, 골드
+            //레벨, 이름, 직업, 공격력, 아이템공격력, 방어력, 아이템 방어력, 체력, 골드
             public int level;
             public string name;
             public string job;
             public int attack;
+            public int itemAttack;
             public int defense;
+            public int itemDefense;
             public int hp;
             public int gold;
+            public int storeCount; //상점 방문 횟수
 
             //생성자
-            public Player(string name, string job, int level, int attack, int defense, int hp, int gold)
+            public Player(string name, string job, int level, int attack, int defense, int hp, int gold, int itemAttack, int itemDefense, int storecount)
             {
                 this.name = name;
                 this.job = job;
@@ -33,9 +36,12 @@ namespace TextRpgVER2
                 this.defense = defense;
                 this.hp = hp;
                 this.gold = gold;
+                this.itemAttack = itemAttack;
+                this.itemDefense = itemDefense;
+                this.storeCount = storecount;
             }
         }
-        static Player player = new Player("이름", "직업", 1, 10, 5, 100, 1500); //플레이어 객체 생성
+        static Player player = new Player("이름", "직업", 1, 10, 5, 100, 5000, 0, 0, 0); //플레이어 객체 생성
 
 
         //아이템 클래스
@@ -108,8 +114,8 @@ namespace TextRpgVER2
                             case "Y":
                                 Console.WriteLine($"{Name}을(를) 장착하였습니다.");
                                 //플레이어의 공격력과 방어력 증가
-                                player.attack += Attack;
-                                player.defense += Defense;
+                                player.itemAttack += Attack;
+                                player.itemDefense += Defense;
 
                                 //장착된 아이템의 리스트 넘버링을 [E]로 출력
                                 EquipItem = "[E]"; //장착 후 아이템 리스트에서 [ ] 제거
@@ -134,8 +140,8 @@ namespace TextRpgVER2
                 }
                 else
                 {
-                    Console.WriteLine("상점 주인: 그 물건은 이미 팔렸어. 다른 걸 찾아봐.");
-                    Console.WriteLine($"{Name}은(는) 이미 판매되었습니다.");
+                    Console.WriteLine("상점 주인: 그 물건은 이미 가지고 있잖아? 다른 물건은 어때?");
+                    Console.WriteLine($"{Name}을(를) 이미 소유하고 있습니다.");
                 }
                 ItemPurchase(player); //구매 후 상점으로 이동
             }
@@ -174,8 +180,8 @@ namespace TextRpgVER2
                             EquipItem = "[ ]"; //장착 해제 후 아이템 리스트에서 [E] 제거
                             Price = GetPrice.ToString() + "G"; //판매 후 가격 초기화
 
-                            player.attack -= Attack; //플레이어의 공격력 감소
-                            player.defense -= Defense; //플레이어의 방어력 감소
+                            player.itemAttack -= Attack; //플레이어의 공격력 감소
+                            player.itemDefense -= Defense; //플레이어의 방어력 감소
                             player.gold += (int)(GetPrice * 0.8); //판매 후 골드 증가
 
                             //판매하면 reciptItem에서 삭제
@@ -210,9 +216,9 @@ namespace TextRpgVER2
                 if (SoldOut && !Equipped)
                 {
                     Console.WriteLine($"{Name}을(를) 장착하였습니다.");
-                    //플레이어의 공격력과 방어력 증가
-                    player.attack += Attack;
-                    player.defense += Defense;
+                    //플레이어의 아이템 공격력과 방어력 증가
+                    player.itemAttack += Attack;
+                    player.itemDefense += Defense;
 
                     //장착된 아이템의 리스트 넘버링을 [E]로 출력
                     EquipItem = "[E]";
@@ -224,8 +230,8 @@ namespace TextRpgVER2
                     Console.WriteLine($"{Name}의 장착을 해제하였습니다.");
 
                     //플레이어의 공격력과 방어력 감소
-                    player.attack -= Attack;
-                    player.defense -= Defense;
+                    player.itemAttack -= Attack;
+                    player.itemDefense -= Defense;
 
                     //장착된 아이템의 리스트 넘버링을 [ ]로 출력
                     EquipItem = "[ ]";
@@ -245,28 +251,25 @@ namespace TextRpgVER2
                 new Item("[ ]","스파르타의 창", "스파르타 전사들이 사용하던 창입니다.", 2000, 7, 0)
             };
 
+            //특별상점 아이템 리스트
+            public static List<Item> specialItemList = new List<Item>()
+            {
+                new Item("[ ]","용맹의 전투 갑옷", "전투 중 집중력을 높여 방어력을 강화하는 갑옷입니다.", 4200, 0, 18),
+                new Item("[ ]","화염석 도끼", "불꽃 기운이 깃든 도끼로 공격력이 뛰어납니다.", 2300, 8, 0),
+                new Item("[ ]","광휘의 창", "빛나는 마법이 깃든 창입니다.", 4000, 15, 0),
+                new Item("[ ]","기사 갑옷", "기사들이 입는 튼튼한 갑옷입니다.", 10000, 0, 40),
+                new Item("[ ]","기사 검", "기사들이 사용하는 검입니다.", 20000, 50, 0),
+                new Item("[ ]","황금 갑옷", "황금으로 만들어진 갑옷입니다. 사치품.", 50000, 0, 5),
+                new Item("[ ]","황금 검", "황금으로 만들어진 검입니다. 사치품.", 100000, 5, 0),
+            };
+
             //구매한 아이템 리스트(SoldOut이 true인 아이템만 출력)
             //아이템을 리스트화
             public static List<Item> reciptItem = new List<Item>()
             {
                 //아이템을 구매하면 여기에 add됨
             };
-            //장비한 아이템의 공격력과 방어력 총 증가를 계산함 (공격력 7 장비를 장비시, 기본값+장비보정치 (+장비보정치)로 표시)
-            public static void reciptAttack()
-            {
-                int totalAttack = 0; //아이템으로 증가한 공격력
-                int totalDefense = 0; //아이템으로 증가한 방어력
-                foreach (var item in Item.itemList)
-                {
-                    if (item.SoldOut == true && item.Equipped == true)
-                    {
-                        totalAttack += item.Attack;
-                        totalDefense += item.Defense;
-                    }
-                }
-                Console.WriteLine($"총 공격력: {totalAttack}");
-                Console.WriteLine($"총 방어력: {totalDefense}");
-            }
+            
         }
 
         static void Main(string[] args)
@@ -290,8 +293,11 @@ namespace TextRpgVER2
 
         static void GameStart(Player player)
         {
-            Console.WriteLine($"스파르타 마을에 어서오세요, {player.name}님!");
+            Console.WriteLine($"그린 티 마을에 어서오세요, {player.name}님!");
+            Console.WriteLine("============================================");
+            Console.WriteLine("마을의 초입부터 푸른 녹음이 감싸는 조용하고 평화로운 마을. \n 부드러운 바람에 실려 오는 풀내음과 찻잎의 향기가 마을 전체를 감싼다. \n마을의 건물들은 대부분 따뜻한 색의 목재건물로 지어져, 자연과 어우러지고, 아늑함을 준다.\n마을에 모여든 모험가들은 각자의 여정을 시작하고, 이어간다.\n");
             Console.WriteLine("여기서 할 수 있는 행동은 다음과 같습니다.");
+            Console.Write("입력: ");
             Console.WriteLine("1. 스테이터스");
             Console.WriteLine("2. 인벤토리");
             Console.WriteLine("3. 상점");
@@ -305,9 +311,13 @@ namespace TextRpgVER2
                     break;
                 case "2":
                     Inventory();
+                    Console.WriteLine("낡은 가죽 가방을 열어본다.");
                     break;
                 case "3":
+                    player.storeCount += 1;
                     Store();
+                    Console.WriteLine($"문에 달린 경첩이 끼익거리며 열린다. 소리를 들은 상인이 호탕하게 웃으며 {player.name}을 맞이한다.");                    
+                    Console.WriteLine(" ");                    
                     break;
                 case "4":
                     Console.WriteLine("게임을 종료합니다.");
@@ -325,13 +335,13 @@ namespace TextRpgVER2
             //플레이어 스탯 반영
             //장비 착용 시 공격력, 방어력 증가를 표시함 (공격력 7 장비를 장비시, 기본값+장비보정치 (+장비보정치)로 표시)
 
-            Console.WriteLine($"{player.name}님의 상태창입니다.");
+            Console.WriteLine($"{player.name}님의 현재 상태입니다.");
             Console.WriteLine("==Status==");
             Console.WriteLine($"이름: {player.name}");
             Console.WriteLine($"레벨: {player.level}");
             Console.WriteLine($"직업: {player.job}");
-            Console.WriteLine($"공격력: {player.attack} (+{player.attack - 10})");
-            Console.WriteLine($"방어력: {player.defense} (+{player.defense - 5})");
+            Console.WriteLine($"공격력: {player.attack+player.itemAttack} (+{player.itemAttack})");
+            Console.WriteLine($"방어력: {player.defense+player.itemDefense} (+{player.itemDefense})");
             Console.WriteLine($"체력: {player.hp}");
             Console.WriteLine($"골드: {player.gold}");
 
@@ -343,6 +353,7 @@ namespace TextRpgVER2
             {
                 case 1:
                     Inventory();
+                    Console.WriteLine("낡은 가죽 가방을 열어본다.");
                     break;
                 case 0:
                     GameStart(player);
@@ -358,8 +369,6 @@ namespace TextRpgVER2
 
         static void Inventory()
         {
-            Console.WriteLine("낡은 가죽 가방을 열어본다.");
-
             Console.WriteLine("==Inventory==");
             //구매한 아이템=소지한 아이템
             //그럼 여기도 itemList가 아니라 reciptItem을 사용해야 함
@@ -426,8 +435,8 @@ namespace TextRpgVER2
 
         protected static void Store()
         {
-            Console.WriteLine($"문에 달린 경첩이 끼익거리며 열린다. 소리를 들은 상인이 호탕하게 웃으며 {player.name}을 맞이한다.");
-            Console.WriteLine("상점 주인: 오, 모험가 양반. \n무엇을 도와드릴까?");
+            Console.WriteLine("상점은 오래되었지만 깔끔하다. \n여러 사람이 오가며 맨질하게 닳은 바닥은, 이곳이 많은 모험가들을 맞이했음을 알려준다. \n진열된 물건들 중에서는 낡은 무기들도 있지만, \n상당히 좋은 품질의 무기와 방어구도 눈에 들어온다.");
+            Console.WriteLine(" ");
             Console.WriteLine($"{player.name}님의 골드: {player.gold}G");
 
             Console.WriteLine("==Store==");
@@ -437,9 +446,35 @@ namespace TextRpgVER2
                 Console.WriteLine($"{item.Name} \t| 공격력 +{item.Attack} \t| 방어력 +{item.Defense} \t|{item.Description}\t|가격: {item.Price}");
             });
 
+            if (player.storeCount == 1)
+            {
+                Console.WriteLine("상점 주인: 오, 처음보는 얼굴이군. 새로운 모험가인가? 어서와, 어서와!");
+                Console.WriteLine("상점 주인: 필요한 게 있으면 얼마든지 말하라고!");
+            }
+            else if(player.storeCount > 1&&player.storeCount < 10)
+            {
+                Console.WriteLine("상점 주인: 오, 또 왔군. 이번엔 무엇을 사러왔나?");
+            }
+            else if (player.storeCount == 10)
+            {
+                Console.WriteLine($"상점 주인: 이야, {player.name} 아닌가! 오늘은 무슨 일이야?");
+                Console.WriteLine("상점 주인: 이렇게 자주 와주니 내가 다 기쁘군.");
+                Console.WriteLine("단골에게는, 특별 상점을 열고 있다네. 조금 비싸긴 하지만 말이야! 하하!");
+            }
+            else
+            {
+                Console.WriteLine($"상점 주인: 어서오게, {player.name}!");
+                Console.WriteLine("상점 주인: 오늘 모험은 어땠는가?");
+            }
+            Console.WriteLine("=============================");
+            Console.WriteLine("  ");
             Console.WriteLine("1. 아이템 구매");
             Console.WriteLine("2. 아이템 판매");
-            Console.WriteLine("0. 나가기");
+            if(player.storeCount >= 10)
+            {
+                Console.WriteLine("3. 특별 상점");
+            }
+            Console.WriteLine("0. 나가기\n ");
             string Sselect = Console.ReadLine();
             switch (Sselect)
             {
@@ -448,6 +483,21 @@ namespace TextRpgVER2
                     break;
                 case "2":
                     ItemSell(player);
+                    break;
+                case "3":
+                    if (player.storeCount >= 10)
+                    {
+                        Console.WriteLine("상점 주인: 하핫, 단골에게는 얼마든지!");
+                        Console.WriteLine("상점 주인: 특별 상품들은 기존에 파는 물건들 보다 훨씬 성능이 좋지.");
+                        Console.WriteLine("상점 주인: 하지만 비싸니까, 돈은 두둑히 챙겨와!");
+                        SpecialStore(player);
+                    }
+                    else
+                    {
+                        Console.WriteLine("상점 주인: 특별 상점이야기를 어디서 들었는진 모르겠지만,");
+                        Console.WriteLine("상점 주인: 이건 단골에게만 보여주는 물건들이야.");
+                        Store();
+                    }
                     break;
                 case "0":
                     GameStart(player);
@@ -460,11 +510,13 @@ namespace TextRpgVER2
         }
         static void ItemPurchase(Player player)
         {
-            Console.WriteLine($"상점 주인: 자, 자, 원하는 걸 골라봐.");
             Console.WriteLine($"{player.name}님의 골드: {player.gold}G");
+            Console.WriteLine("  \n");
+            Console.WriteLine($"상점 주인: 자, 자, 원하는 걸 골라봐.");
+            
 
             Console.WriteLine("==Buy==");
-            Console.WriteLine("구매할 아이템을 선택해주세요.");
+
 
             int index = 1; //아이템 리스트 넘버링
             Item.itemList.ForEach(item =>
@@ -473,9 +525,9 @@ namespace TextRpgVER2
             });
 
             //넘버링을 통해 구매할 아이템 선택, 구매처리
-
+            Console.WriteLine("구매할 아이템을 선택해주세요.");
             Console.WriteLine(" ");
-            Console.WriteLine("0. 나가기");
+            Console.WriteLine("0. 나가기\n ");
 
             Console.Write("입력:");
 
@@ -514,10 +566,10 @@ namespace TextRpgVER2
         }
         static void ItemSell(Player player)
         {
+            Console.WriteLine($"{player.name}님의 골드: {player.gold}G");
+            Console.WriteLine("  \n");
             Console.WriteLine($"상점 주인: 뭔가 팔 물건이라도 있나?");
             Console.WriteLine("==Sell==");
-            Console.WriteLine("판매할 아이템을 선택해주세요.");
-            Console.WriteLine("0. 나가기");
 
             int index = 1; //아이템 리스트 넘버링
 
@@ -527,6 +579,9 @@ namespace TextRpgVER2
             {
                 Console.WriteLine($"{index++}. {item.EquipItem} {item.Name} \t| 공격력 +{item.Attack} \t| 방어력 +{item.Defense} \t|{item.Description}\t|가격: {item.GetPrice * 0.8}G");
             });
+
+            Console.WriteLine("판매할 아이템을 선택해주세요.");
+            Console.WriteLine("0. 나가기\n ");
 
             int Sellselect = int.Parse(Console.ReadLine());
             if (Sellselect == 0)
@@ -546,6 +601,39 @@ namespace TextRpgVER2
                 ItemSell(player);
             }
 
+        }
+
+        static void SpecialStore(Player player)
+        {
+            Console.WriteLine($"{player.name}님의 골드: {player.gold}G");
+            Console.WriteLine("  \n");
+            Console.WriteLine($"상점 주인: 이거 아무한테나 보여주는 물건이 아니야.");
+            Console.WriteLine("==Buy==");
+
+            int index = 1; //아이템 리스트 넘버링
+            Item.specialItemList.ForEach(item =>
+            {
+                Console.WriteLine($"{index++}. {item.Name} \t| 공격력 +{item.Attack} \t| 방어력 +{item.Defense} \t|{item.Description}\t|가격: {item.Price}");
+            });
+            Console.WriteLine("구매할 아이템을 선택해주세요.");
+            Console.WriteLine(" ");
+            Console.WriteLine("0. 나가기\n ");
+            Console.Write("입력:");
+            int select = int.Parse(Console.ReadLine());
+            if (select == 0)
+            {
+                Console.WriteLine("상점 주인: 다른 용건이 더 있나?");
+                Store();
+            }
+            else if (select > 0 && select <= Item.specialItemList.Count)
+            {
+                Item.specialItemList[select - 1].Buy(); //구매 메서드 호출
+            }
+            else
+            {
+                Console.WriteLine("잘못된 입력입니다.");
+                SpecialStore(player);
+            }
         }
     }
 }
