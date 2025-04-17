@@ -212,6 +212,7 @@ namespace TextRpgVER2
                         player.gold -= GetPrice; //구매 후 골드 감소
                         SoldOut = true; //판매 완료
                         Price = "구매완료"; //구매가 완료로 변경
+
                         //아이템을 구매하면 reciptItem에 add됨
                         reciptItem.Add(this); //구매한 아이템 리스트에 추가
 
@@ -861,19 +862,24 @@ namespace TextRpgVER2
                 Console.WriteLine("상점 주인: 하하, 소중히 쓰라고!");
                 Store();
             }
-            else if (select > 0 && select < index)
+            else if (select > 0)
             {
-                if (Job.전사.ToString() == player.job)
+                if (Job.전사.ToString() == player.job && select <= Item.itemList_Warrior.Count)
                 {
-                    Item.itemList_Warrior[index - 1].Buy(); //구매 메서드 호출
+                    Item.itemList_Warrior[select - 1].Buy(); //구매 메서드 호출
                 }
-                else if (Job.마법사.ToString() == player.job)
+                else if (Job.마법사.ToString() == player.job && select <= Item.itemList_Wizard.Count)
                 {
-                    Item.itemList_Wizard[index - 1].Buy(); //구매 메서드 호출
+                    Item.itemList_Wizard[select - 1].Buy(); //구매 메서드 호출
                 }
-                else if (Job.궁수.ToString() == player.job)
+                else if (Job.궁수.ToString() == player.job && select <= Item.itemList_Archer.Count)
                 {
-                    Item.itemList_Archer[index - 1].Buy(); //구매 메서드 호출
+                    Item.itemList_Archer[select - 1].Buy(); //구매 메서드 호출
+                }
+                else
+                {
+                    Console.WriteLine("잘못된 입력입니다.");
+                    ItemPurchase(player);
                 }
             }            
             else
