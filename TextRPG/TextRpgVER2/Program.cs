@@ -383,16 +383,35 @@ namespace TextRpgVER2
                 new Item("[ ]","크레타의 활", "크레타 궁수들이 사용하던 활입니다.", 3500, 7, 4)
             };
 
-            //특별상점 아이템 리스트
-            public static List<Item> specialItemList = new List<Item>()
+            //특별상점 아이템 리스트 전사-마법사-궁수
+            public static List<Item> specialItemList_Warrior = new List<Item>()
             {
-                new Item("[ ]","용맹의 전투 갑옷", "전투 중 집중력을 높여 방어력을 강화하는 갑옷입니다.", 4500, 0, 21),
+                new Item("[ ]","용맹의 갑옷", "전투 중 집중력을 높여 방어력을 강화하는 갑옷입니다.", 4500, 0, 21),
                 new Item("[ ]","기사 갑옷", "기사들이 입는 튼튼한 갑옷입니다.", 10000, 0, 40),
                 new Item("[ ]","황금 갑옷", "황금으로 만들어진 갑옷입니다. 실전에서 사용하긴 힘듭니다.", 50000, 0, 5),
-                new Item("[ ]","세계수의 도끼", "세계수로 만든 도끼로, 공격력도 뛰어납니다.", 5000, 10, 8),
-                new Item("[ ]","광휘의 창", "강력한 마법이 깃든 창입니다.", 10000, 21, 15),                
-                new Item("[ ]","기사 검방패", "기사들이 사용하는 검과 방패입니다.", 20000, 50, 22),
+                new Item("[ ]","기사 검방패", "기사들이 사용하는 검과 방패입니다.", 10000, 21, 15),                
+                new Item("[ ]","세계수의 도끼", "세계수로 만든 도끼로, 공격력도 뛰어납니다.", 20000, 50, 22),
                 new Item("[ ]","황금 검", "황금으로 만들어진 검입니다. 실전에서 사용하긴 힘듭니다.", 100000, 5, 0),
+            };
+
+            public static List<Item> specialItemList_Wizard = new List<Item>()
+            {
+                new Item("[ ]","지식의 로브", "선인들의 지식을 전수 받을 수 있는 로브입니다.", 4500, 7, 14),
+                new Item("[ ]","현인의 로브", "현인들이 입는 로브입니다.", 10000, 15, 25),
+                new Item("[ ]","황금 로브", "황금으로 만들어진 로브입니다. 실전에서 사용하긴 힘듭니다.", 50000, 0, 5),
+                new Item("[ ]","현인의 스태프", "현인들이 사용하는 스태프입니다.", 10000, 36, 0),
+                new Item("[ ]","세계수의 스태프", "세계수로 만든 스태프입니다. 공격력도 뛰어납니다.", 20000, 70, 2),
+                new Item("[ ]","황금 완드", "황금으로 만들어진 완드입니다. 실전에서 사용하긴 힘듭니다.", 100000, 5, 0)
+            };
+
+            public static List<Item> specialItemList_Archer = new List<Item>()
+            {
+                new Item("[ ]","명중의 경갑", "정확한 조준을 도와주는 경갑입니다.", 4500, 4, 17),
+                new Item("[ ]","명궁 경갑", "명궁들이 입는 튼튼한 경갑입니다.", 10000, 10, 30),
+                new Item("[ ]","황금 경갑", "황금으로 만들어진 경갑입니다. 실전에서 사용하긴 힘듭니다.", 50000, 0, 5),
+                new Item("[ ]","명중의 활", "정확한 조준을 도와주는 활입니다.", 10000, 31, 5),
+                new Item("[ ]","세계수의 활", "세계수로 만든 활로, 공격력도 뛰어납니다.", 20000, 60, 12),
+                new Item("[ ]","황금 활", "황금으로 만들어진 활입니다. 실전에서 사용하긴 힘듭니다.", 100000, 5, 0)
             };
 
             //구매한 아이템 리스트(SoldOut이 true인 아이템만 출력)
@@ -941,10 +960,27 @@ namespace TextRpgVER2
             Console.WriteLine("==Buy==");
 
             int index = 1; //아이템 리스트 넘버링
-            Item.specialItemList.ForEach(item =>
+            if (Job.전사.ToString() == player.job)
             {
-                Console.WriteLine($"{index++}. {item.Name} \t| 공격력 +{item.Attack} \t| 방어력 +{item.Defense} \t|{item.Description}\t|가격: {item.Price}");
-            });
+                Item.specialItemList_Warrior.ForEach(item =>
+                {
+                    Console.WriteLine($"{index++}. {item.Name} \t| 공격력 +{item.Attack} \t| 방어력 +{item.Defense} \t|{item.Description}\t|가격: {item.Price}");
+                });
+            }
+            else if (Job.마법사.ToString() == player.job)
+            {
+                Item.specialItemList_Wizard.ForEach(item =>
+                {
+                    Console.WriteLine($"{index++}. {item.Name} \t| 공격력 +{item.Attack} \t| 방어력 +{item.Defense} \t|{item.Description}\t|가격: {item.Price}");
+                });
+            }
+            else if (Job.궁수.ToString() == player.job)
+            {
+                Item.specialItemList_Archer.ForEach(item =>
+                {
+                    Console.WriteLine($"{index++}. {item.Name} \t| 공격력 +{item.Attack} \t| 방어력 +{item.Defense} \t|{item.Description}\t|가격: {item.Price}");
+                });
+            }
             Console.WriteLine("구매할 아이템을 선택해주세요.");
             Console.WriteLine(" ");
             Console.WriteLine("0. 나가기\n ");
@@ -955,9 +991,25 @@ namespace TextRpgVER2
                 Console.WriteLine("상점 주인: 다른 용건이 더 있나?");
                 Store();
             }
-            else if (select > 0 && select <= Item.specialItemList.Count)
+            else if (select > 0)
             {
-                Item.specialItemList[select - 1].Buy(); //구매 메서드 호출
+                if (Job.전사.ToString() == player.job && select <= Item.specialItemList_Warrior.Count)
+                {
+                    Item.specialItemList_Warrior[select - 1].Buy(); //구매 메서드 호출
+                }
+                else if (Job.마법사.ToString() == player.job && select <= Item.specialItemList_Wizard.Count)
+                {
+                    Item.specialItemList_Wizard[select - 1].Buy(); 
+                }
+                else if (Job.궁수.ToString() == player.job && select <= Item.specialItemList_Archer.Count)
+                {
+                    Item.specialItemList_Archer[select - 1].Buy(); 
+                }
+                else
+                {
+                    Console.WriteLine("잘못된 입력입니다.");
+                    ItemPurchase(player);
+                }
             }
             else
             {
