@@ -449,7 +449,9 @@ namespace TextRpgVER2
             {
                 new Dungeon("평원 던전", "드넓은 풀밭과 나무들이 어우러진 평원입니다.", 5, 1000),
                 new Dungeon("바위산 던전", "거대한 바위들이 우뚝 솟아있는 바위산입니다.", 11, 1700),
-                new Dungeon("화산 던전", "활화산으로 불길이 치솟는 위험한 지역입니다.", 17, 2500)
+                new Dungeon("화산 던전", "활화산으로 불길이 치솟는 위험한 지역입니다.", 17, 2500),
+                new Dungeon("신비의 숲", "신비로운 풀과 나무들이 어우러진 숲입니다.", 40, 5000),
+                new Dungeon("마굴", "실패한 마법생물들이 가득한 던전입니다.", 100, 15000)
             };
 
             //던전 진행 메서드 (권장 방어력보다 낮으면 일정 확률로 실패함)
@@ -1142,8 +1144,13 @@ namespace TextRpgVER2
             Console.WriteLine("======================================");
             Console.WriteLine("그린티 마을 뒷편에는, 각종 던전으로 향할 수 있는 포탈이 있다.");
             Console.WriteLine("여러 모험가들이 던전으로 향하고, 돌아오고 있다.");
-            Console.WriteLine("그린티 마을에서는 세 곳의 던전을 들어갈 수 있다.");
+            Console.WriteLine("그린티 마을에서는 총 다섯 곳의 던전을 들어갈 수 있다.");
+            Console.WriteLine("그 중 비교적 쉬운 던전은 세 곳이다.");
             Console.WriteLine("첫 모험가도 쉽게 공략할 수 있는 평원 던전, \n 자신을 어느정도 보호할 수 있어야 하는 바위산 던전, \n 마지막으로, 뜨거운 불길이 가득한 화산 던전이 있다.");
+            Console.WriteLine(" ");
+            Console.WriteLine("그리고, 어려운 던전이 두 곳.");
+            Console.WriteLine("독특한 식물이 드리운 신비의 숲, \n 마지막으로 실패한 마법생물로 가득 찬 마굴이 있다.");
+
             Console.WriteLine(" ");
             Console.WriteLine("==Dungeon==");
             int index = 1; //던전 리스트 넘버링
@@ -1197,6 +1204,30 @@ namespace TextRpgVER2
 
                     Dungeon.dungeonList[2].DungeonClear(); //던전 공략 실행 메서드 호출
                     break;
+                case 4:
+                    Console.WriteLine("==신비의 숲==");
+                    Console.WriteLine("신비의 숲은 신비로운 식물들이 가득하다.");
+                    Console.WriteLine("신비의 숲의 깊은 곳에서 괴물들의 울음소리가 들린다.");
+                    Console.WriteLine(" ");
+                    Console.WriteLine("아름다운 숲 속에 사는 생물들은, 순도높은 마나를 품어 더욱 강력한 힘을 낼 수 있다.");
+                    Console.WriteLine("그렇기에, 스스로를 보호할 수 있을 만큼 강해야 공략할 수 있다.");
+                    Console.WriteLine(" ");
+
+                    Dungeon.dungeonList[3].DungeonClear(); //던전 공략 실행 메서드 호출
+                    break;
+                case 5:
+                    Console.WriteLine("==마굴==");
+                    Console.WriteLine("마굴은 폐허가 된 탑을 의미한다.");
+                    Console.WriteLine("마굴의 깊은 곳에서 버려진 마법 생물들의 울음소리가 들린다.");
+                    Console.WriteLine(" ");
+                    Console.WriteLine("마굴의 마법생물들은 고대 실험의 실패작들이다.");
+                    Console.WriteLine("그렇기에, 처음보는 공격에도 대응할 수 있는 힘이 있어야 공략할 수 있다.");
+                    Console.WriteLine(" ");
+
+                    Dungeon.dungeonList[4].DungeonClear(); //던전 공략 실행 메서드 호출
+                    break;
+
+
                 case 0:
                     Console.WriteLine("다시 마을로 돌아갑니다.");
                     GameStart(player);
