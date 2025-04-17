@@ -25,23 +25,22 @@ namespace TextRpgVER2
             public string name;
             public string job;
 
-            public float attack;
+            public int attack;
             public int itemAttack;
-            public float defense;
+            public int defense;
             public int itemDefense;
 
             public int hp;
             public int gold;
 
             public int storeCount; //상점 방문 횟수
-            public int killCount; //몬스터 처치 횟수
 
             public int exp; //경험치
             public int needExp; //레벨업에 필요한 경험치
 
             //생성자
             //이름, 직업, 레벨, 공격력, 방어력, 체력, 골드, 아이템 공격력, 아이템 방어력, 상점 방문 횟수, 몬스터 처치 횟수, 경험치
-            public Player(string name, string job, int level, float attack, float defense, int hp, int gold, int itemAttack, int itemDefense, int storecount, int killCount, int exp)
+            public Player(string name, string job, int level, int attack, int defense, int hp, int gold, int itemAttack, int itemDefense, int storecount, int exp)
             {
                 this.name = name;
                 this.job = job;
@@ -53,7 +52,6 @@ namespace TextRpgVER2
                 this.itemAttack = itemAttack;
                 this.itemDefense = itemDefense;
                 this.storeCount = storecount;
-                this.killCount = killCount;
                 this.exp = exp;
                 needExp = 125 + (level * level * level); //레벨업에 필요한 경험치 계산
             }
@@ -66,10 +64,10 @@ namespace TextRpgVER2
                     //필요 경험치보다 경험치가 적어질 때까지 반복
                     while (exp >= needExp)
                     {
-                        attack += attack * 0.5f;
-                        defense += defense * 0.5f;
+                        attack += (int)(attack * 0.5f);
+                        defense += (int)(defense * 0.5f);
                         level++;
-                        exp -= needExp; //레벨업 후 경험치 초기화
+                        exp -= needExp; //레벨업 후 남은 경험치 유지
                         needExp = 125 + (level * level * level); //다음 레벨업에 필요한 경험치 계산
                         Console.WriteLine("============================================");
                         Console.WriteLine($"{name}의 레벨이 올랐습니다! \n 현재 레벨: {level}");
@@ -153,7 +151,7 @@ namespace TextRpgVER2
         }
         //직업 별로 다른 스탯 적용 (전사: 공격력 5, 방어력 10/ 마법사: 공격력 10, 방어력 5/ 궁수: 공격력 8, 방어력 7)
         //플레이어 생성
-        static Player player = new Player("이름", "직업", 1, 0, 0, 100, 1500, 0, 0, 0, 0, 0); //플레이어 생성
+        static Player player = new Player("이름", "직업", 1, 0, 0, 100, 1500, 0, 0, 0, 0); //플레이어 생성
 
 
         //아이템 클래스
@@ -435,7 +433,7 @@ namespace TextRpgVER2
             };
 
             //던전 진행 메서드 (권장 방어력보다 낮으면 일정 확률로 실패함)
-            public void DungeonSelect()
+            public void DungeonClear()
             {
                 Console.WriteLine($"{name}의 권장 방어력은 {recommendDefense}입니다.");
                 Console.WriteLine("입장하시겠습니까?(Y/N)");
@@ -467,8 +465,9 @@ namespace TextRpgVER2
                                     break;
                                 }
                                 Console.WriteLine($"{player.name}님의 체력: {player.hp}");
+                                Console.WriteLine("============================================");
 
-                                DungeonStart(); //던전으로 이동
+                                DungeonStart(); //던전입구로 이동 
                             }        
                             
                         }
@@ -502,16 +501,16 @@ namespace TextRpgVER2
                         Console.WriteLine($"획득 Gold:{(int)(rewardGold * (1 + reward * 0.01f))}");
                         Console.WriteLine($"획득 경험치:{(int)(minusHP * 10)}");
                         player.LevelUp(); //레벨업 체크
-                        DungeonStart(); //던전 공략 후 던전으로 이동 
+                        DungeonStart(); //던전 공략 후 던전입구로 이동 
                         break;
                     case "N":
                         Console.WriteLine("던전에 들어가지 않고, 다시 발길을 돌렸다.");
                         Console.WriteLine("============================================");
-                        DungeonStart(); //던전으로 이동
+                        DungeonStart(); //던전입구로 이동
                         break;
                     default:
                         Console.WriteLine("잘못된 입력입니다.");
-                        DungeonSelect();
+                        DungeonClear();
                         break;
                 }
 
@@ -857,101 +856,32 @@ namespace TextRpgVER2
 
             int select = int.Parse(Console.ReadLine());
 
-            switch (select)
+            if (select == 0)
             {
-                case 1:
-                    if (Job.전사.ToString() == player.job)
-                    {
-                        Item.itemList_Warrior[0].Buy();
-                    }
-                    else if (Job.마법사.ToString() == player.job)
-                    {
-                        Item.itemList_Wizard[0].Buy();
-                    }
-                    else if (Job.궁수.ToString() == player.job)
-                    {
-                        Item.itemList_Archer[0].Buy();
-                    }
-                    break;
-                case 2:
-                    if (Job.전사.ToString() == player.job)
-                    {
-                        Item.itemList_Warrior[1].Buy();
-                    }
-                    else if (Job.마법사.ToString() == player.job)
-                    {
-                        Item.itemList_Wizard[1].Buy();
-                    }
-                    else if (Job.궁수.ToString() == player.job)
-                    {
-                        Item.itemList_Archer[1].Buy();
-                    }
-                    break;
-                case 3:
-                    if (Job.전사.ToString() == player.job)
-                    {
-                        Item.itemList_Warrior[2].Buy();
-                    }
-                    else if (Job.마법사.ToString() == player.job)
-                    {
-                        Item.itemList_Wizard[2].Buy();
-                    }
-                    else if (Job.궁수.ToString() == player.job)
-                    {
-                        Item.itemList_Archer[2].Buy();
-                    }
-                    break;
-                case 4:
-                    if (Job.전사.ToString() == player.job)
-                    {
-                        Item.itemList_Warrior[3].Buy();
-                    }
-                    else if (Job.마법사.ToString() == player.job)
-                    {
-                        Item.itemList_Wizard[3].Buy();
-                    }
-                    else if (Job.궁수.ToString() == player.job)
-                    {
-                        Item.itemList_Archer[3].Buy();
-                    }
-                    break;
-                case 5:
-                    if (Job.전사.ToString() == player.job)
-                    {
-                        Item.itemList_Warrior[4].Buy();
-                    }
-                    else if (Job.마법사.ToString() == player.job)
-                    {
-                        Item.itemList_Wizard[4].Buy();
-                    }
-                    else if (Job.궁수.ToString() == player.job)
-                    {
-                        Item.itemList_Archer[4].Buy();
-                    }
-                    break;
-                case 6:
-                    if (Job.전사.ToString() == player.job)
-                    {
-                        Item.itemList_Warrior[5].Buy();
-                    }
-                    else if (Job.마법사.ToString() == player.job)
-                    {
-                        Item.itemList_Wizard[5].Buy();
-                    }
-                    else if (Job.궁수.ToString() == player.job)
-                    {
-                        Item.itemList_Archer[5].Buy();
-                    }
-                    break;
-                case 0:
-                    Console.WriteLine("상점 주인: 하하, 소중히 쓰라고!");
-                    Store();
-                    break;
-                default:
-                    Console.WriteLine("잘못된 입력입니다.");
-                    ItemPurchase(player);
-                    break;
+                Console.WriteLine("상점 주인: 하하, 소중히 쓰라고!");
+                Store();
             }
+            else if (select > 0 && select < index)
+            {
+                if (Job.전사.ToString() == player.job)
+                {
+                    Item.itemList_Warrior[index - 1].Buy(); //구매 메서드 호출
+                }
+                else if (Job.마법사.ToString() == player.job)
+                {
+                    Item.itemList_Wizard[index - 1].Buy(); //구매 메서드 호출
+                }
+                else if (Job.궁수.ToString() == player.job)
+                {
+                    Item.itemList_Archer[index - 1].Buy(); //구매 메서드 호출
+                }
+            }            
+            else
+            {
+                Console.WriteLine("잘못된 입력입니다.");
+                ItemPurchase(player);
+            }
+
 
         }
         static void ItemSell(Player player)
@@ -1039,8 +969,6 @@ namespace TextRpgVER2
             Console.WriteLine("==Tavern==");
             Console.WriteLine("1. 식사 주문");
             Console.WriteLine("2. 휴식/숙박");
-            Console.WriteLine("3. 의뢰");
-            Console.WriteLine("4. 대화");
             Console.WriteLine(" ");
             Console.WriteLine("원하는 행동을 선택해주세요.");
             Console.WriteLine("0. 나가기\n ");
@@ -1055,13 +983,6 @@ namespace TextRpgVER2
                 case 2:
                     Rest();
                     break;
-                case 3:
-                    Request();
-                    break;
-                case 4:
-                    Console.WriteLine("여관 주인: 이야기? 좋지.");
-                    Tarvern();
-                    break;
                 case 0:
                     GameStart(player);
                     break;
@@ -1070,7 +991,6 @@ namespace TextRpgVER2
                     Tarvern();
                     break;
             }
-
 
         }
 
@@ -1092,6 +1012,25 @@ namespace TextRpgVER2
 
 
             int select = int.Parse(Console.ReadLine());
+
+            switch (select)
+            {
+                case 1:
+                    
+                    break;
+                case 2:
+                    
+                    break;
+                case 0:
+                    Console.WriteLine("여관 주인: 마음이 바뀐거야?");
+                    Tarvern();
+                    break;
+                default:
+                    Console.WriteLine("잘못된 입력입니다.");
+                    Meal();
+                    break;
+            }
+
         }
 
         //휴식/숙박
@@ -1123,7 +1062,7 @@ namespace TextRpgVER2
                     else
                     {
                         Console.WriteLine("여관 주인: 방을 빌리기엔 돈이 부족한 것 같은데?");
-                        Console.WriteLine("여관 주인: 던전에 가서 돈을 벌어오거나, 의뢰를 받아보는 건 어때?");
+                        Console.WriteLine("여관 주인: 상점에 가서 물건을 팔거나, 던전에 가서 돈을 벌어보는 건 어때?");
                         Tarvern();
                     }
                     break;
@@ -1137,35 +1076,29 @@ namespace TextRpgVER2
                     break;
             }
         }
-        //의뢰
-        static void Request()
-        {
-            Console.WriteLine("여관의 한쪽 벽에는 각종 의뢰서가 붙어있다.");
-            Console.WriteLine("여관 주인: 의뢰를 받고 싶으면, 의뢰서를 나한테 가져와.");
-            Console.WriteLine("여관 주인: 의뢰를 완료하면 보상을 줄게.");
 
-            Console.WriteLine("==Request==");
-            //의뢰 리스트 랜덤 생성
-
-
-        }
 
         //던전 입장
         static void DungeonStart()
         {
+            Console.WriteLine("======================================");
+            Console.WriteLine("그린티 마을 뒷편에는, 각종 던전으로 향할 수 있는 포탈이 있다.");
             Console.WriteLine("여러 모험가들이 던전으로 향하고, 돌아오고 있다.");
-            Console.WriteLine("그린티 마을의 던전은 세 곳으로 나뉘어져 있다.");
+            Console.WriteLine("그린티 마을에서는 세 곳의 던전을 들어갈 수 있다.");
             Console.WriteLine("첫 모험가도 쉽게 공략할 수 있는 평원 던전, \n 자신을 어느정도 보호할 수 있어야 하는 바위산 던전, \n 마지막으로, 뜨거운 불길이 가득한 화산 던전이 있다.");
             Console.WriteLine(" ");
             Console.WriteLine("==Dungeon==");
-            Console.WriteLine("1. 평원 던전: 권장 방어력 5");
-            Console.WriteLine("2. 바위산 던전: 권장 방어력 11");
-            Console.WriteLine("3. 화산 던전: 권장 방어력 17");
+            int index = 1; //던전 리스트 넘버링
 
+            //리스트 형태로 출력
+            Dungeon.dungeonList.ForEach(dungeon =>
+            {
+                Console.WriteLine($"{index++}. {dungeon.name} \t| 권장 방어력: {dungeon.recommendDefense}");
+            });
 
-            Console.WriteLine(" ");
-            Console.WriteLine("원하는 행동을 선택해주세요.");
+            Console.WriteLine("======================================");
             Console.WriteLine("0. 나가기\n ");
+            Console.WriteLine("원하는 행동을 선택해주세요.");
             Console.Write("입력: ");
 
             int select = int.Parse(Console.ReadLine());
@@ -1174,27 +1107,37 @@ namespace TextRpgVER2
             {
                 case 1:
                     Console.WriteLine("==평원 던전==");
-                    Console.WriteLine(" ");
                     Console.WriteLine("던전의 입구는 넓고, 바람이 시원하게 불어온다.");
                     Console.WriteLine("던전의 깊은 곳에서 괴물들의 울음소리가 들린다.");
                     Console.WriteLine(" ");
                     Console.WriteLine("평원 던전은 대부분 토끼, 사슴 등 초식 동물형 몬스터들이 많다.");
                     Console.WriteLine("그렇기에, 공격성이 낮아 초보자가 공략하기 쉽다.");
+                    Console.WriteLine(" ");
 
-
+                    Dungeon.dungeonList[0].DungeonClear(); //던전 공략 실행 메서드 호출
                     break;
 
                 case 2:
                     Console.WriteLine("==바위산 던전==");
-                    Console.WriteLine(" ");
                     Console.WriteLine("바위산은 좁고, 어두운 통로가 이어져 있다.");
                     Console.WriteLine("바위산의 깊은 곳에서 괴물들의 울음소리가 울려온다.");
+                    Console.WriteLine(" ");
+                    Console.WriteLine("높게 솟은 바위산은 시야를 가리고, \n 바위산의 깊은 곳에는 공격성이 강한 몬스터들이 많다.");
+                    Console.WriteLine("그렇기에, 어느정도 방어력이 있어야 공략할 수 있다.");
+                    Console.WriteLine(" ");
+
+                    Dungeon.dungeonList[1].DungeonClear(); //던전 공략 실행 메서드 호출
                     break;
                 case 3:
-                    Console.WriteLine("화산 던전으로 입장합니다.");
-                    Console.WriteLine(" ");
-                    Console.WriteLine("화산 던전은 뜨거운 불길이 가득하다.");
+                    Console.WriteLine("==화산 던전==");
+                    Console.WriteLine("태동하는 화산의 입구에서는 뜨거운 열기가 느껴진다.");
                     Console.WriteLine("화산의 깊은 곳에서 들려오는 괴물들의 울음소리가 들린다.");
+                    Console.WriteLine(" ");
+                    Console.WriteLine("뜨거운 불과 용암에 적응한 몬스터들은 더욱 공격성이 강하다.");
+                    Console.WriteLine("그렇기에, 튼튼한 방어력이 있어야 공략할 수 있다.");
+                    Console.WriteLine(" ");
+
+                    Dungeon.dungeonList[2].DungeonClear(); //던전 공략 실행 메서드 호출
                     break;
                 case 0:
                     Console.WriteLine("다시 마을로 돌아갑니다.");
@@ -1202,20 +1145,7 @@ namespace TextRpgVER2
                     break;
             }
 
-        }
-
-        /*일단 방어력을 비교한다.
-        >총 방어력이 권장 방어력보다 낮으면 실패할 확률이 발생한다.
-        >방어력이 높으면 성공-권장 방어력+-에 따라 종료시 체력 소모에 반영됨
-
-        공격력을 비교한다.
-        >공력력에 따라 +추가보상을 획득한다.
-        
-        경험치 획득
-        >감소한 hp*10만큼 획득한다. (너무 쉬우면, 그만큼 경험치가 올라가지 않는다)*/
-
-        //던전 공략 1. 평원 2. 바위산 3. 화산
-        //던전 클래스-공략 메서드를 제작하는 게 나아보임       
+        }        
 
     }
 }
