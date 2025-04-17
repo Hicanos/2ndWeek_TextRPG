@@ -64,11 +64,11 @@ namespace TextRpgVER2
                     //필요 경험치보다 경험치가 적어질 때까지 반복
                     while (exp >= needExp)
                     {
-                        attack += (int)(attack * 0.5f);
-                        defense += (int)(defense * 0.5f);
+                        attack += (int)(attack * 0.1f);
+                        defense += (int)(defense * 0.1f);
                         level++;
                         exp -= needExp; //레벨업 후 남은 경험치 유지
-                        needExp = 125 + (level * level * level); //다음 레벨업에 필요한 경험치 계산
+                        needExp = 500 + (level * level * level); //다음 레벨업에 필요한 경험치 계산
                         Console.WriteLine("============================================");
                         Console.WriteLine($"{name}의 레벨이 올랐습니다! \n 현재 레벨: {level}");
                         Console.WriteLine($"공격력: {attack + itemAttack} (+{itemAttack})");
