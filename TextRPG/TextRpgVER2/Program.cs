@@ -64,18 +64,20 @@ namespace TextRpgVER2
                 if (exp >= needExp)
                 {
                     //필요 경험치보다 경험치가 적어질 때까지 반복
-                    while(exp>=needExp)
+                    while (exp >= needExp)
                     {
                         attack += attack * 0.5f;
                         defense += defense * 0.5f;
                         level++;
                         exp -= needExp; //레벨업 후 경험치 초기화
                         needExp = 125 + (level * level * level); //다음 레벨업에 필요한 경험치 계산
+                        Console.WriteLine("============================================");
                         Console.WriteLine($"{name}의 레벨이 올랐습니다! \n 현재 레벨: {level}");
                         Console.WriteLine($"공격력: {attack + itemAttack} (+{itemAttack})");
                         Console.WriteLine($"방어력: {defense + itemAttack} (+{itemDefense})");
+                        Console.WriteLine("============================================");
                     }
-                   
+
                 }
             }
 
@@ -113,11 +115,11 @@ namespace TextRpgVER2
                             Console.WriteLine("여관 주인: 돈이 부족한 거야?");
                             Console.WriteLine("여관 주인: 어쩔 수 없네. 지금 가진 돈이라도 줘.");
 
-                            int plusHP = 100-(1000 - player.gold)/10; //남은 골드가 600이면 60 회복
+                            int plusHP = 100 - (1000 - player.gold) / 10; //남은 골드가 600이면 60 회복
                             player.hp += plusHP; //체력 회복
                             player.gold = 0; //골드 전액 차감
                         }
-                        else 
+                        else
                         {
                             Console.WriteLine("여관 주인: 아이고, 방값도 없는 거야?");
                             Console.WriteLine("여관 주인: 그렇다고 치료한 것까지 다 뺏어갈 생각은 없어.");
@@ -386,12 +388,12 @@ namespace TextRpgVER2
             public static List<Item> specialItemList = new List<Item>()
             {
                 new Item("[ ]","용맹의 전투 갑옷", "전투 중 집중력을 높여 방어력을 강화하는 갑옷입니다.", 4500, 0, 21),
-                new Item("[ ]","화염석 도끼", "불꽃 기운이 깃든 도끼로 공격력이 뛰어납니다.", 2300, 8, 0),
-                new Item("[ ]","광휘의 창", "빛나는 마법이 깃든 창입니다.", 4000, 15, 0),
                 new Item("[ ]","기사 갑옷", "기사들이 입는 튼튼한 갑옷입니다.", 10000, 0, 40),
-                new Item("[ ]","기사 검", "기사들이 사용하는 검입니다.", 20000, 50, 0),
-                new Item("[ ]","황금 갑옷", "황금으로 만들어진 갑옷입니다. 사치품.", 50000, 0, 5),
-                new Item("[ ]","황금 검", "황금으로 만들어진 검입니다. 사치품.", 100000, 5, 0),
+                new Item("[ ]","황금 갑옷", "황금으로 만들어진 갑옷입니다. 실전에서 사용하긴 힘듭니다.", 50000, 0, 5),
+                new Item("[ ]","세계수의 도끼", "세계수로 만든 도끼로, 공격력도 뛰어납니다.", 5000, 10, 8),
+                new Item("[ ]","광휘의 창", "강력한 마법이 깃든 창입니다.", 10000, 21, 15),                
+                new Item("[ ]","기사 검방패", "기사들이 사용하는 검과 방패입니다.", 20000, 50, 22),
+                new Item("[ ]","황금 검", "황금으로 만들어진 검입니다. 실전에서 사용하긴 힘듭니다.", 100000, 5, 0),
             };
 
             //구매한 아이템 리스트(SoldOut이 true인 아이템만 출력)
@@ -405,8 +407,115 @@ namespace TextRpgVER2
 
 
         //던전 클래스
-        class Dungeon()
+        class Dungeon
         {
+            //던전 생성
+            //던전 이름, 권장 방어력, 보상 기본 골드
+
+            public string name;
+            public string description;
+            public int recommendDefense;
+            public int rewardGold;
+
+            //생성자
+            public Dungeon(string name, string description, int recommendDefense, int rewardGold)
+            {
+                this.name = name;
+                this.description = description;
+                this.recommendDefense = recommendDefense;
+                this.rewardGold = rewardGold;
+            }
+
+            //던전 리스트 생성 (평원, 바위산, 화산)
+            public static List<Dungeon> dungeonList = new List<Dungeon>()
+            {
+                new Dungeon("평원 던전", "드넓은 풀밭과 나무들이 어우러진 평원입니다.", 5, 1000),
+                new Dungeon("바위산 던전", "거대한 바위들이 우뚝 솟아있는 바위산입니다.", 11, 1700),
+                new Dungeon("화산 던전", "활화산으로 불길이 치솟는 위험한 지역입니다.", 17, 2500)
+            };
+
+            //던전 진행 메서드 (권장 방어력보다 낮으면 일정 확률로 실패함)
+            public void DungeonSelect()
+            {
+                Console.WriteLine($"{name}의 권장 방어력은 {recommendDefense}입니다.");
+                Console.WriteLine("입장하시겠습니까?(Y/N)");
+                Console.Write("입력: ");
+                string answer = Console.ReadLine();
+                Console.WriteLine("============================================");
+                switch (answer)
+                {
+                    case "Y":
+
+                        Console.WriteLine("던전 공략을 시작합니다.");
+                        Console.WriteLine("============================================");
+                        //실패는 방어력이 권장 방어력보다 낮을 때만 확률적으로 발생
+                        if (player.defense + player.itemDefense <= recommendDefense)
+                        {
+                            int clear = new Random().Next(1, 101); //던전 공략 실패 확률 1~100
+                            if (clear <= 40) //40% 확률로 실패
+                            {
+                                Console.WriteLine("던전 공략에 실패했습니다.");
+                                Console.WriteLine($"체력이 {50 + recommendDefense - (player.defense + player.itemDefense)}감소합니다.");
+                                player.hp -= (int)(50 + recommendDefense - (player.defense + player.itemDefense)); //체력 감소
+                                if (player.hp <= 0)
+                                {
+                                    player.hp = 0; //마이너스가 되더라도 체력 0으로 설정
+                                    Console.WriteLine("============================================");
+                                    Console.WriteLine("공략은 실패했다. 하지만….");
+                                    Console.WriteLine($"{player.name}님의 남은 체력: 0");
+                                    player.GameOver(); //게임 오버 메서드 호출
+                                    break;
+                                }
+                                Console.WriteLine($"{player.name}님의 체력: {player.hp}");
+
+                                DungeonStart(); //던전으로 이동
+                            }        
+                            
+                        }
+                        //나머지는 성공                        
+                        //체력 소모 값=20~35에 방어력에 따른 보정치 발생
+                        int minusHP = new Random().Next(20, 36);
+                        player.hp -= (int)(minusHP - ((player.defense + player.itemDefense) - 5));
+
+                        //공략에 성공해도 체력이 0이 되면 행동불능->실패
+                        if (player.hp <= 0)
+                        {
+                            player.hp = 0; //마이너스가 되더라도 체력 0으로 설정
+                            Console.WriteLine("============================================");
+                            Console.WriteLine("공략은 성공했다. 하지만….");
+                            Console.WriteLine($"{player.name}님의 남은 체력: 0");
+                            player.GameOver(); //게임 오버 메서드 호출
+                            break;
+                        }
+                        Console.WriteLine("던전 공략에 성공했습니다.");
+                        Console.WriteLine("============================================");
+                        Console.WriteLine($"{player.name}님의 체력이 {minusHP} 감소했습니다.");
+                        Console.WriteLine($"{player.name}님의 체력: {player.hp}");
+
+                        //보상은 공격력~공격력*2 %까지 보정됨 (공격력 10이면 10%~20%까지 보정됨)
+                        int rewardPercent = (int)(player.attack + player.itemAttack);
+                        int reward = new Random().Next(rewardPercent, rewardPercent * 2 + 1);
+                        player.gold += (int)(rewardGold * (1 + reward * 0.01f)); //던전 보상 골드 지급 (기본 보상+보정치) 즉, 리워드가 20%로 결정되면 1.2배 지급
+                        player.exp += (int)(minusHP * 10); //감소한 체력의 10배 만큼 경험치 지급
+
+                        Console.WriteLine("==던전 결과==");
+                        Console.WriteLine($"획득 Gold:{(int)(rewardGold * (1 + reward * 0.01f))}");
+                        Console.WriteLine($"획득 경험치:{(int)(minusHP * 10)}");
+                        player.LevelUp(); //레벨업 체크
+                        DungeonStart(); //던전 공략 후 던전으로 이동 
+                        break;
+                    case "N":
+                        Console.WriteLine("던전에 들어가지 않고, 다시 발길을 돌렸다.");
+                        Console.WriteLine("============================================");
+                        DungeonStart(); //던전으로 이동
+                        break;
+                    default:
+                        Console.WriteLine("잘못된 입력입니다.");
+                        DungeonSelect();
+                        break;
+                }
+
+            }
 
         }
 
@@ -660,7 +769,7 @@ namespace TextRpgVER2
                     Console.WriteLine($"{item.Name} \t| 공격력 +{item.Attack} \t| 방어력 +{item.Defense} \t|{item.Description}\t|가격: {item.Price}");
                 });
             }
-            
+
 
             Console.WriteLine("=============================");
             Console.WriteLine("  ");
@@ -717,7 +826,7 @@ namespace TextRpgVER2
 
 
             int index = 1; //아이템 리스트 넘버링
-            if(Job.전사.ToString() == player.job)
+            if (Job.전사.ToString() == player.job)
             {
                 Item.itemList_Warrior.ForEach(item =>
                 {
@@ -751,7 +860,7 @@ namespace TextRpgVER2
             switch (select)
             {
                 case 1:
-                    if(Job.전사.ToString() == player.job)
+                    if (Job.전사.ToString() == player.job)
                     {
                         Item.itemList_Warrior[0].Buy();
                     }
@@ -765,7 +874,7 @@ namespace TextRpgVER2
                     }
                     break;
                 case 2:
-                    if(Job.전사.ToString() == player.job)
+                    if (Job.전사.ToString() == player.job)
                     {
                         Item.itemList_Warrior[1].Buy();
                     }
@@ -779,7 +888,7 @@ namespace TextRpgVER2
                     }
                     break;
                 case 3:
-                    if(Job.전사.ToString() == player.job)
+                    if (Job.전사.ToString() == player.job)
                     {
                         Item.itemList_Warrior[2].Buy();
                     }
@@ -793,7 +902,7 @@ namespace TextRpgVER2
                     }
                     break;
                 case 4:
-                    if(Job.전사.ToString() == player.job)
+                    if (Job.전사.ToString() == player.job)
                     {
                         Item.itemList_Warrior[3].Buy();
                     }
@@ -807,7 +916,7 @@ namespace TextRpgVER2
                     }
                     break;
                 case 5:
-                    if(Job.전사.ToString() == player.job)
+                    if (Job.전사.ToString() == player.job)
                     {
                         Item.itemList_Warrior[4].Buy();
                     }
@@ -821,7 +930,7 @@ namespace TextRpgVER2
                     }
                     break;
                 case 6:
-                    if(Job.전사.ToString() == player.job)
+                    if (Job.전사.ToString() == player.job)
                     {
                         Item.itemList_Warrior[5].Buy();
                     }
@@ -938,7 +1047,7 @@ namespace TextRpgVER2
             Console.Write("입력: ");
             int select = int.Parse(Console.ReadLine());
 
-            switch(select)
+            switch (select)
             {
                 case 1:
                     Meal();
@@ -1072,7 +1181,7 @@ namespace TextRpgVER2
                     Console.WriteLine("평원 던전은 대부분 토끼, 사슴 등 초식 동물형 몬스터들이 많다.");
                     Console.WriteLine("그렇기에, 공격성이 낮아 초보자가 공략하기 쉽다.");
 
-                    PlainDungeon();
+
                     break;
 
                 case 2:
@@ -1106,86 +1215,7 @@ namespace TextRpgVER2
         >감소한 hp*10만큼 획득한다. (너무 쉬우면, 그만큼 경험치가 올라가지 않는다)*/
 
         //던전 공략 1. 평원 2. 바위산 3. 화산
-        //던전 클래스-공략 메서드를 제작하는 게 나아보임
-        static void PlainDungeon()
-        {
-            Console.WriteLine("평원 던전의 권장 방어력은 5입니다.");
-            Console.WriteLine("입장하시겠습니까?(Y/N)");
-            string answer = Console.ReadLine();
-
-            switch (answer)
-            {
-                case "Y":
-
-                    Console.WriteLine("던전 공략을 시작합니다.");
-                    if (player.defense + player.itemDefense >= 5)
-                    {
-                        Console.WriteLine("던전 공략에 성공했습니다.");
-                        //체력 소모 값=20~35에 방어력에 따른 보정치 발생
-                        int minusHP = new Random().Next(20, 36);
-                        player.hp -= (int)(minusHP - ((player.defense + player.itemDefense) - 5));
-                        
-                        //보상은 공격력~공격력*2 %까지 보정됨 (공격력 10이면 10%~20%까지 보정됨)
-                        float rewardPercent = player.attack + player.itemAttack;
-                        int reward = new Random().Next((int)rewardPercent, (int)rewardPercent * 2 + 1);
-                        int rewardGold = (int)(1000 + 1000 * (reward * 0.01f));
-                        player.gold += rewardGold;
-                        player.exp += (int)(minusHP * 10); //경험치 획득
-
-
-
-                        Console.WriteLine("==던전 결과==");
-                        Console.WriteLine($"획득 Gold:{rewardGold}");
-                        Console.WriteLine($"획득 경험치:{(int)(minusHP * 10)}");
-                        player.LevelUp(); //레벨업 체크
-
-                        DungeonStart();
-
-                    }
-                    else
-                    {
-                        int clear = new Random().Next(1, 101);
-                        if (clear <= 40)
-                        {
-                            Console.WriteLine("던전 공략에 실패했습니다.");
-                            Console.WriteLine($"체력이 {50 + 5 - (player.defense + player.itemDefense)}감소합니다.");
-                            player.hp -= (int)(50 + 5 - (player.defense + player.itemDefense));
-                            Console.WriteLine($"현재 체력: {player.hp}");  
-                        }
-                        else
-                        {
-                            Console.WriteLine("던전 공략에 성공했습니다.");
-                            //체력 소모 값=20~35에 방어력에 따른 보정치 발생
-                            int minusHP = new Random().Next(20, 36);
-                            player.hp -= (int)(minusHP - ((player.defense + player.itemDefense) - 5));
-
-                            //보상은 공격력~공격력*2 %까지 보정됨 (공격력 10이면 10%~20%까지 보정됨)
-                            float rewardPercent = player.attack + player.itemAttack;
-                            int reward = new Random().Next((int)rewardPercent, (int)rewardPercent * 2 + 1);
-                            int rewardGold = (int)(1000 + 1000 * (reward * 0.01f));
-                            player.gold += rewardGold;
-                            player.exp += (int)(minusHP * 10); //경험치 획득
-
-
-
-                            Console.WriteLine("==던전 결과==");
-                            Console.WriteLine($"획득 Gold:{rewardGold}");
-                            Console.WriteLine($"획득 경험치:{(int)(minusHP * 10)}");
-                            player.LevelUp(); //레벨업 체크
-
-                            DungeonStart();
-                        }
-                    }
-                    break;
-
-                case "N":
-                    Console.WriteLine("던전 공략을 그만둡니다.");
-                    DungeonStart();
-                    break;
-
-            }
-
-        }
+        //던전 클래스-공략 메서드를 제작하는 게 나아보임       
 
     }
 }
