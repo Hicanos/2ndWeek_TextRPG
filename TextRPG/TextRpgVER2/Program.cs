@@ -351,8 +351,8 @@ namespace TextRpgVER2
                 Equipment(); //장착 후 장비관리로 이동
             }
 
-            //아이템 리스트 생성-직업군 별로 다른 아이템 출력
 
+            //아이템 리스트 생성-직업군 별로 다른 아이템 출력
             public static List<Item> itemList_Warrior = new List<Item>()
             {
                 new Item("[ ]","수련자 갑옷", "수련에 도움을 주는 갑옷입니다.", 1200, 0, 6),
@@ -413,6 +413,20 @@ namespace TextRpgVER2
                 new Item("[ ]","세계수의 활", "세계수로 만든 활로, 공격력도 뛰어납니다.", 20000, 60, 12),
                 new Item("[ ]","황금 활", "황금으로 만들어진 활입니다. 실전에서 사용하긴 힘듭니다.", 100000, 5, 0)
             };
+
+            //여관 아이템-식사 리스트 attack: 회복량으로 계산 500G=100hp 
+            public static List<Item> tavernItemList = new List<Item>()
+            {
+                new Item("[ ]","염소젖","여관에서 키우는 염소의 젖입니다.", 2, 3, 0),
+                new Item("[ ]","맥주", "값싼 맥주입니다.", 10, 2, 0),
+                new Item("[ ]","와인", "특별한 날에 마시는 와인입니다.", 70, 4, 0),
+                new Item("[ ]","감자튀김","소금이 들어가 비싼 튀긴 감자입니다.", 100, 5, 0),
+                new Item("[ ]","호밀빵", "호밀로 만든 빵입니다.", 50, 10, 0),
+                new Item("[ ]","스튜","여관의 특제 스튜입니다.", 100, 20, 0),
+                new Item("[ ]","특제 스테이크","입에서 살살 녹는 스테이크입니다.", 350, 70, 0)
+
+            };
+
 
             //구매한 아이템 리스트(SoldOut이 true인 아이템만 출력)
             //아이템을 리스트화
@@ -540,6 +554,15 @@ namespace TextRpgVER2
 
         }
 
+        //콘솔 창 정리
+        static void Clear()
+        {
+            Console.WriteLine("진행하려면, 아무 키나 누르세요.");
+            Console.ReadKey();
+            Console.Clear();
+            Console.WriteLine("============================================");
+        }
+
 
 
 
@@ -553,6 +576,8 @@ namespace TextRpgVER2
             Console.Write("직업: ");
             //번호에 따라 맞는 직업을 job에 입력, enum 사용
             Job job = (Job)Enum.Parse(typeof(Job), Console.ReadLine());
+
+
             //선택한 직업에 따라 스탯 초기화
             if (job == Job.전사)
             {
@@ -604,24 +629,29 @@ namespace TextRpgVER2
             switch (select)
             {
                 case 1:
+                    Clear();
                     Status(player);
                     break;
                 case 2:
+                    Clear();
                     Inventory();
                     Console.WriteLine("낡은 가죽 가방을 열어본다.");
                     break;
                 case 3:
+                    Clear();
                     player.storeCount += 1;
                     Store();
                     Console.WriteLine($"문에 달린 경첩이 끼익거리며 열린다. 소리를 들은 상인이 호탕하게 웃으며 {player.name}을 맞이한다.");
                     Console.WriteLine(" ");
                     break;
                 case 4:
+                    Clear();
                     Tarvern();
                     Console.WriteLine("맑은 종소리가 울린다. 분주하게 움직이던 직원이 큰 소리로 외친다.");
                     Console.WriteLine("직원: 어서오세요! '한 잔의 휴식'입니다!");
                     break;
                 case 5:
+                    Clear();
                     Console.WriteLine("마을 밖으로 나가, 던전으로 향했다.");
                     DungeonStart();
                     break;
@@ -631,6 +661,7 @@ namespace TextRpgVER2
                     break;
                 default:
                     Console.WriteLine("잘못된 입력입니다.");
+                    Clear();
                     GameStart(player);
                     break;
             }
@@ -658,14 +689,17 @@ namespace TextRpgVER2
             switch (select)
             {
                 case 1:
+                    Clear();
                     Inventory();
                     Console.WriteLine("낡은 가죽 가방을 열어본다.");
                     break;
                 case 0:
+                    Clear();
                     GameStart(player);
                     break;
                 default:
                     Console.WriteLine("잘못된 입력입니다.");
+                    Clear();
                     Status(player);
                     break;
             }
@@ -696,10 +730,13 @@ namespace TextRpgVER2
                     Equipment();
                     break;
                 case "0":
+                    Console.WriteLine("가방을 닫았다.");
+                    Clear();
                     GameStart(player);
                     break;
                 default:
                     Console.WriteLine("잘못된 입력입니다.");
+                    Clear();
                     Inventory();
                     break;
             }
@@ -725,6 +762,8 @@ namespace TextRpgVER2
 
             if (Eselect == 0)
             {
+                Console.WriteLine("옷을 정리했다.");
+                Clear();
                 Inventory();
             }
             else if (Eselect > 0 && Eselect <= Item.reciptItem.Count)
@@ -734,6 +773,7 @@ namespace TextRpgVER2
             else
             {
                 Console.WriteLine("잘못된 입력입니다.");
+                Clear();
                 Equipment();
             }
 
@@ -816,6 +856,7 @@ namespace TextRpgVER2
                         Console.WriteLine("상점 주인: 하핫, 단골에게는 얼마든지!");
                         Console.WriteLine("상점 주인: 특별 상품들은 기존에 파는 물건들 보다 훨씬 성능이 좋지.");
                         Console.WriteLine("상점 주인: 하지만 비싸니까, 돈은 두둑히 챙겨와!");
+                        Clear();
                         SpecialStore();
                     }
                     else
@@ -826,10 +867,13 @@ namespace TextRpgVER2
                     }
                     break;
                 case "0":
+                    Console.WriteLine("상점 주인: 다음에 또 오시게!");
+                    Clear();
                     GameStart(player);
                     break;
                 default:
                     Console.WriteLine("잘못된 입력입니다.");
+                    Clear();
                     Store();
                     break;
             }
@@ -900,12 +944,14 @@ namespace TextRpgVER2
                 else
                 {
                     Console.WriteLine("잘못된 입력입니다.");
+                    Clear();
                     ItemPurchase(player);
                 }
             }            
             else
             {
                 Console.WriteLine("잘못된 입력입니다.");
+                Clear();
                 ItemPurchase(player);
             }
 
@@ -936,6 +982,7 @@ namespace TextRpgVER2
             if (Sellselect == 0)
             {
                 Console.WriteLine("상점 주인: 다른 용건이 더 있나?");
+                Clear();
                 Store();
             }
             else if (Sellselect > 0 && Sellselect <= Item.reciptItem.Count)
@@ -947,6 +994,7 @@ namespace TextRpgVER2
             else
             {
                 Console.WriteLine("잘못된 입력입니다.");
+                Clear();
                 ItemSell(player);
             }
 
@@ -991,6 +1039,7 @@ namespace TextRpgVER2
             if (select == 0)
             {
                 Console.WriteLine("상점 주인: 다른 용건이 더 있나?");
+                Clear();
                 Store();
             }
             else if (select > 0)
@@ -1010,12 +1059,14 @@ namespace TextRpgVER2
                 else
                 {
                     Console.WriteLine("잘못된 입력입니다.");
+                    Clear();
                     ItemPurchase(player);
                 }
             }
             else
             {
                 Console.WriteLine("잘못된 입력입니다.");
+                Clear();
                 SpecialStore();
             }
         }
@@ -1038,9 +1089,13 @@ namespace TextRpgVER2
             switch (select)
             {
                 case 1:
+                    Console.WriteLine("여관 주인: 식사 한 명? 기다려봐, 메뉴판을 가져다줄게.");
+                    Clear();
                     Meal();
                     break;
                 case 2:
+                    Console.WriteLine("여관 주인: 숙박? 마침 방이 비어있네.");
+                    Clear();
                     Rest();
                     break;
                 case 0:
@@ -1059,8 +1114,7 @@ namespace TextRpgVER2
         {
             Console.WriteLine("=======================================");
             Console.WriteLine($"{player.name}님의 골드: {player.gold}G");
-            Console.WriteLine("=======================================");
-            Console.WriteLine("여관 주인: 식사 한 명? 자, 여기 메뉴판이야.");
+            Console.WriteLine("=======================================");            
             Console.WriteLine("여관 주인: 메뉴가 정해지면 말해줘.");
             Console.WriteLine("==Menu==");
             //아이템 리스트
@@ -1096,7 +1150,6 @@ namespace TextRpgVER2
         //휴식/숙박
         static void Rest()
         {
-            Console.WriteLine("여관 주인: 숙박? 마침 방이 비어있네.");
             Console.WriteLine("여관 주인: 방은 500G야.");
             Console.WriteLine("=======================================");
             Console.WriteLine($"{player.name}님의 골드: {player.gold}G");
@@ -1117,21 +1170,25 @@ namespace TextRpgVER2
                         Console.WriteLine("=======================================");
                         Console.WriteLine($"{player.name}님의 골드: {player.gold}G");
                         Console.WriteLine("=======================================");
+                        Clear();
                         Tarvern();
                     }
                     else
                     {
                         Console.WriteLine("여관 주인: 방을 빌리기엔 돈이 부족한 것 같은데?");
                         Console.WriteLine("여관 주인: 상점에 가서 물건을 팔거나, 던전에 가서 돈을 벌어보는 건 어때?");
+                        Clear();
                         Tarvern();
                     }
                     break;
                 case "N":
                     Console.WriteLine("여관 주인: 뭐야, 그만 둘 거야?");
+                    Clear();
                     Tarvern();
                     break;
                 default:
                     Console.WriteLine("잘못된 입력입니다.");
+                    Clear();
                     Rest();
                     break;
             }
