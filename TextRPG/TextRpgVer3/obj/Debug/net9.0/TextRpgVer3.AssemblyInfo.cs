@@ -11,12 +11,12 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyCompanyAttribute("TextRpgVER2")]
+[assembly: System.Reflection.AssemblyCompanyAttribute("TextRpgVer3")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b19349d66ad073a4b80a810d00fdb7718665e304")]
-[assembly: System.Reflection.AssemblyProductAttribute("TextRpgVER2")]
-[assembly: System.Reflection.AssemblyTitleAttribute("TextRpgVER2")]
+[assembly: System.Reflection.AssemblyProductAttribute("TextRpgVer3")]
+[assembly: System.Reflection.AssemblyTitleAttribute("TextRpgVer3")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
 
 // MSBuild WriteCodeFragment 클래스에서 생성되었습니다.

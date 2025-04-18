@@ -364,29 +364,35 @@ namespace TextRpgVER2
                 Equipment(); //장착 후 장비관리로 이동
             }
 
+            //아이템 리스트 집합
 
-            //아이템 리스트 생성-직업군 별로 다른 아이템 출력
-            public static List<Item> itemList_Warrior = new List<Item>()
+            public class ItemList
             {
+                //아이템 리스트 생성-직업군 별로 다른 아이템 출력
+                [System.Text.Json.Serialization.JsonIgnore]
+                public static List<Item> itemList_Warrior = new List<Item>()
+                {
                 new Item("[ ]","수련자 갑옷", "수련에 도움을 주는 갑옷입니다.", 1200, 0, 6),
                 new Item("[ ]","무쇠갑옷", "무쇠로 만들어져 튼튼한 갑옷입니다.", 2000, 0, 10),
                 new Item("[ ]","스파르타의 갑옷", "스파르타 전사들이 입던 갑옷입니다.", 4000, 0, 17),
                 new Item("[ ]","낡은 검", "쉽게 볼 수 있는 낡은 검입니다.", 600, 2, 0),
                 new Item("[ ]","청동 도끼", "청동으로 만들어진 도끼입니다.", 1500, 4, 1),
                 new Item("[ ]","스파르타의 창", "스파르타 전사들이 사용하던 창입니다.", 2500, 7, 2)
-            };
+                };
 
-            public static List<Item> itemList_Wizard = new List<Item>()
-            {
+                [System.Text.Json.Serialization.JsonIgnore]
+                public static List<Item> itemList_Wizard = new List<Item>()
+                {
                 new Item("[ ]","수련자의 로브", "견습 마법사들이 입는 로브입니다.", 1000, 2, 3),
                 new Item("[ ]","마법사의 로브", "마법사들이 입는 로브입니다.", 1800, 4, 5),
                 new Item("[ ]","드루이드의 로브", "드루이드들이 입던 로브입니다.", 3500, 6, 9),
                 new Item("[ ]","낡은 완드", "쉽게 볼 수 있는 낡은 완드입니다.", 900, 3, 0),
                 new Item("[ ]","의식용 완드", "청동으로 만들어진 지팡이입니다.", 1800, 6, 0),
                 new Item("[ ]","드루이드의 스태프", "드루이드들이 사용하던 스태프입니다.", 3500, 11, 0)
-            };
+                };
 
-            public static List<Item> itemList_Archer = new List<Item>()
+                [System.Text.Json.Serialization.JsonIgnore]
+                public static List<Item> itemList_Archer = new List<Item>()
             {
                 new Item("[ ]","수련자의 경갑", "견습 궁수들이 입는 경갑옷입니다.", 1000, 0, 5),
                 new Item("[ ]","궁수의 경갑", "궁수들이 입는 경갑옷입니다.", 1800, 0, 9),
@@ -396,18 +402,21 @@ namespace TextRpgVER2
                 new Item("[ ]","크레타의 활", "크레타 궁수들이 사용하던 활입니다.", 3500, 7, 4)
             };
 
-            //특별상점 아이템 리스트 전사-마법사-궁수
-            public static List<Item> specialItemList_Warrior = new List<Item>()
+                //특별상점 아이템 리스트 전사-마법사-궁수
+                [System.Text.Json.Serialization.JsonIgnore]
+                public static List<Item> specialItemList_Warrior = new List<Item>()
             {
                 new Item("[ ]","용맹의 갑옷", "전투 중 집중력을 높여 방어력을 강화하는 갑옷입니다.", 4500, 0, 21),
                 new Item("[ ]","기사 갑옷", "기사들이 입는 튼튼한 갑옷입니다.", 10000, 0, 40),
                 new Item("[ ]","황금 갑옷", "황금으로 만들어진 갑옷입니다. 실전에서 사용하긴 힘듭니다.", 50000, 0, 5),
-                new Item("[ ]","기사 검방패", "기사들이 사용하는 검과 방패입니다.", 10000, 21, 15),                
+                new Item("[ ]","기사 검방패", "기사들이 사용하는 검과 방패입니다.", 10000, 21, 15),
                 new Item("[ ]","세계수의 도끼", "세계수로 만든 도끼로, 공격력도 뛰어납니다.", 20000, 50, 22),
                 new Item("[ ]","황금 검", "황금으로 만들어진 검입니다. 실전에서 사용하긴 힘듭니다.", 100000, 5, 0),
             };
 
-            public static List<Item> specialItemList_Wizard = new List<Item>()
+
+                [System.Text.Json.Serialization.JsonIgnore]
+                public static List<Item> specialItemList_Wizard = new List<Item>()
             {
                 new Item("[ ]","지식의 로브", "선인들의 지식을 전수 받을 수 있는 로브입니다.", 4500, 7, 14),
                 new Item("[ ]","현인의 로브", "현인들이 입는 로브입니다.", 10000, 15, 25),
@@ -417,7 +426,9 @@ namespace TextRpgVER2
                 new Item("[ ]","황금 완드", "황금으로 만들어진 완드입니다. 실전에서 사용하긴 힘듭니다.", 100000, 5, 0)
             };
 
-            public static List<Item> specialItemList_Archer = new List<Item>()
+
+                [System.Text.Json.Serialization.JsonIgnore]
+                public static List<Item> specialItemList_Archer = new List<Item>()
             {
                 new Item("[ ]","명중의 경갑", "정확한 조준을 도와주는 경갑입니다.", 4500, 4, 17),
                 new Item("[ ]","명궁 경갑", "명궁들이 입는 튼튼한 경갑입니다.", 10000, 10, 30),
@@ -427,8 +438,8 @@ namespace TextRpgVER2
                 new Item("[ ]","황금 활", "황금으로 만들어진 활입니다. 실전에서 사용하긴 힘듭니다.", 100000, 5, 0)
             };
 
-            //여관 아이템-식사 리스트 attack: 회복량으로 계산 500G=100hp 
-            public static List<Item> tavernItemList = new List<Item>()
+                //여관 아이템-식사 리스트 attack: 회복량으로 계산 500G=100hp 
+                public static List<Item> tavernItemList = new List<Item>()
             {
                 new Item("[ ]","염소젖","여관에서 키우는 염소의 젖입니다.", 2, 3, 0),
                 new Item("[ ]","맥주", "값싼 맥주입니다.", 10, 2, 0),
@@ -437,8 +448,12 @@ namespace TextRpgVER2
                 new Item("[ ]","호밀빵", "호밀로 만든 빵입니다.", 50, 10, 0),
                 new Item("[ ]","스튜","여관의 특제 스튜입니다.", 100, 20, 0),
                 new Item("[ ]","특제 스테이크","입에서 살살 녹는 스테이크입니다.", 350, 70, 0)
+                };
 
-            };
+            }
+
+
+
 
 
 
@@ -862,21 +877,21 @@ namespace TextRpgVER2
 
             if (Job.전사.ToString() == player.Job)
             {
-                Item.itemList_Warrior.ForEach(item =>
+                Item.ItemList.itemList_Warrior.ForEach(item =>
                 {
                     Console.WriteLine($"{item.Name} \t| 공격력 +{item.Attack} \t| 방어력 +{item.Defense} \t|{item.Description}\t|가격: {item.Price}");
                 });
             }
             else if (Job.마법사.ToString() == player.Job)
             {
-                Item.itemList_Wizard.ForEach(item =>
+                Item.ItemList.itemList_Wizard.ForEach(item =>
                 {
                     Console.WriteLine($"{item.Name} \t| 공격력 +{item.Attack} \t| 방어력 +{item.Defense} \t|{item.Description}\t|가격: {item.Price}");
                 });
             }
             else if (Job.궁수.ToString() == player.Job)
             {
-                Item.itemList_Archer.ForEach(item =>
+                Item.ItemList.itemList_Archer.ForEach(item =>
                 {
                     Console.WriteLine($"{item.Name} \t| 공격력 +{item.Attack} \t| 방어력 +{item.Defense} \t|{item.Description}\t|가격: {item.Price}");
                 });
@@ -944,21 +959,21 @@ namespace TextRpgVER2
             int index = 1; //아이템 리스트 넘버링
             if (Job.전사.ToString() == player.Job)
             {
-                Item.itemList_Warrior.ForEach(item =>
+                Item.ItemList.itemList_Warrior.ForEach(item =>
                 {
                     Console.WriteLine($"{index++}. {item.Name} \t| 공격력 +{item.Attack} \t| 방어력 +{item.Defense} \t|{item.Description}\t|가격: {item.Price}");
                 });
             }
             else if (Job.마법사.ToString() == player.Job)
             {
-                Item.itemList_Wizard.ForEach(item =>
+                Item.ItemList.itemList_Wizard.ForEach(item =>
                 {
                     Console.WriteLine($"{index++}. {item.Name} \t| 공격력 +{item.Attack} \t| 방어력 +{item.Defense} \t|{item.Description}\t|가격: {item.Price}");
                 });
             }
             else if (Job.궁수.ToString() == player.Job)
             {
-                Item.itemList_Archer.ForEach(item =>
+                Item.ItemList.itemList_Archer.ForEach(item =>
                 {
                     Console.WriteLine($"{index++}. {item.Name} \t| 공격력 +{item.Attack} \t| 방어력 +{item.Defense} \t|{item.Description}\t|가격: {item.Price}");
                 });
@@ -980,17 +995,17 @@ namespace TextRpgVER2
             }
             else if (select > 0)
             {
-                if (Job.전사.ToString() == player.Job && select <= Item.itemList_Warrior.Count)
+                if (Job.전사.ToString() == player.Job && select <= Item.ItemList.itemList_Warrior.Count)
                 {
-                    Item.itemList_Warrior[select - 1].Buy(); //구매 메서드 호출
+                    Item.ItemList.itemList_Warrior[select - 1].Buy(); //구매 메서드 호출
                 }
-                else if (Job.마법사.ToString() == player.Job && select <= Item.itemList_Wizard.Count)
+                else if (Job.마법사.ToString() == player.Job && select <= Item.ItemList.itemList_Wizard.Count)
                 {
-                    Item.itemList_Wizard[select - 1].Buy(); //구매 메서드 호출
+                    Item.ItemList.itemList_Wizard[select - 1].Buy(); //구매 메서드 호출
                 }
-                else if (Job.궁수.ToString() == player.Job && select <= Item.itemList_Archer.Count)
+                else if (Job.궁수.ToString() == player.Job && select <= Item.ItemList.itemList_Archer.Count)
                 {
-                    Item.itemList_Archer[select - 1].Buy(); //구매 메서드 호출
+                    Item.ItemList.itemList_Archer[select - 1].Buy(); //구매 메서드 호출
                 }
                 else
                 {
@@ -1063,21 +1078,21 @@ namespace TextRpgVER2
             int index = 1; //아이템 리스트 넘버링
             if (Job.전사.ToString() == player.Job)
             {
-                Item.specialItemList_Warrior.ForEach(item =>
+                Item.ItemList.specialItemList_Warrior.ForEach(item =>
                 {
                     Console.WriteLine($"{index++}. {item.Name} \t| 공격력 +{item.Attack} \t| 방어력 +{item.Defense} \t|{item.Description}\t|가격: {item.Price}");
                 });
             }
             else if (Job.마법사.ToString() == player.Job)
             {
-                Item.specialItemList_Wizard.ForEach(item =>
+                Item.ItemList.specialItemList_Wizard.ForEach(item =>
                 {
                     Console.WriteLine($"{index++}. {item.Name} \t| 공격력 +{item.Attack} \t| 방어력 +{item.Defense} \t|{item.Description}\t|가격: {item.Price}");
                 });
             }
             else if (Job.궁수.ToString() == player.Job)
             {
-                Item.specialItemList_Archer.ForEach(item =>
+                Item.ItemList.specialItemList_Archer.ForEach(item =>
                 {
                     Console.WriteLine($"{index++}. {item.Name} \t| 공격력 +{item.Attack} \t| 방어력 +{item.Defense} \t|{item.Description}\t|가격: {item.Price}");
                 });
@@ -1095,17 +1110,17 @@ namespace TextRpgVER2
             }
             else if (select > 0)
             {
-                if (Job.전사.ToString() == player.Job && select <= Item.specialItemList_Warrior.Count)
+                if (Job.전사.ToString() == player.Job && select <= Item.ItemList.specialItemList_Warrior.Count)
                 {
-                    Item.specialItemList_Warrior[select - 1].Buy(); //구매 메서드 호출
+                    Item.ItemList.specialItemList_Warrior[select - 1].Buy(); //구매 메서드 호출
                 }
-                else if (Job.마법사.ToString() == player.Job && select <= Item.specialItemList_Wizard.Count)
+                else if (Job.마법사.ToString() == player.Job && select <= Item.ItemList.specialItemList_Wizard.Count)
                 {
-                    Item.specialItemList_Wizard[select - 1].Buy(); 
+                    Item.ItemList.specialItemList_Wizard[select - 1].Buy(); 
                 }
-                else if (Job.궁수.ToString() == player.Job && select <= Item.specialItemList_Archer.Count)
+                else if (Job.궁수.ToString() == player.Job && select <= Item.ItemList.specialItemList_Archer.Count)
                 {
-                    Item.specialItemList_Archer[select - 1].Buy(); 
+                    Item.ItemList.specialItemList_Archer[select - 1].Buy(); 
                 }
                 else
                 {
@@ -1347,16 +1362,20 @@ namespace TextRpgVER2
         //게임 저장
         public static void SaveGame(Player player)
         {
+            var saveData = new 
+            {
+                Player = player
+            };
 
-            // JsonSerializer 옵션 설정 (순환 참조 방지 및 읽기 쉽게 설정)
+
+            // JsonSerializer 옵션 설정 (읽기 쉽게 설정)
             var options = new JsonSerializerOptions
             {
                 WriteIndented = true,
-                ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve
             };
 
-            string saveData = JsonSerializer.Serialize(player, options);
-            File.WriteAllText("savegame.json", saveData);
+            string json = JsonSerializer.Serialize(player, options);
+            File.WriteAllText("savegame.json", json);
             Console.WriteLine("게임이 저장되었습니다.");
         }
 

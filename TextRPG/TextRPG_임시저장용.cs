@@ -348,4 +348,11 @@ DungeonStart(); //던전 공략 후 던전으로 이동
  
  
  
- 
+   private static void DisplayItemList(List<Item> items)
+  {
+      int index = 1;
+      items.ForEach(item =>
+      {
+          Console.WriteLine($"{index++}. {item.Name} \t| 공격력 +{item.Attack} \t| 방어력 +{item.Defense} \t|{item.Description}\t|가격: {item.Price}");
+      });
+  }
