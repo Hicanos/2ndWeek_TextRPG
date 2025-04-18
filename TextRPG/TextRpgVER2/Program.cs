@@ -38,7 +38,10 @@ namespace TextRpgVER2
             public int Exp { get; set; } //경험치
             public int NeedExp { get; set; } //레벨업에 필요한 경험치
 
-           
+
+            //구매한 아이템을 리스트 저장
+            public List<Item> reciptItem { get; set; } = new List<Item>(); //구매한 아이템 리스트
+
             //매개변수가 있는 생성자
             //이름, 직업, 레벨, 공격력, 방어력, 체력, 골드, 아이템 공격력, 아이템 방어력, 상점 방문 횟수, 몬스터 처치 횟수, 경험치
             public Player(string name, string job, int level, int attack, int defense, int hp, int gold, int itemAttack, int itemDefense, int storeCount, int exp)
@@ -55,6 +58,8 @@ namespace TextRpgVER2
                 StoreCount = storeCount;
                 Exp = exp;
                 NeedExp = 500 + (level * level * level); // 레벨업에 필요한 경험치 계산
+
+                reciptItem = new List<Item>(); // 구매한 아이템 리스트 초기화
             }
 
             // 매개변수가 없는 기본 생성자 (역직렬화를 위해 필요)
@@ -159,7 +164,7 @@ namespace TextRpgVER2
 
 
         //아이템 클래스
-        class Item
+        public class Item
         {
 
             /*soldout이 true이면 판매 완료, false이면 판매 가능(Player 클래스의 gold와 비교)
@@ -222,7 +227,7 @@ namespace TextRpgVER2
                         Price = "구매완료"; //구매가 완료로 변경
 
                         //아이템을 구매하면 reciptItem에 add됨
-                        reciptItem.Add(this); //구매한 아이템 리스트에 추가
+                        player.reciptItem.Add(this); //구매한 아이템 리스트에 추가
 
                         Console.WriteLine("상점 주인: 가방에 넣어줄까, 아니면 입고 갈래?");
 
@@ -279,7 +284,7 @@ namespace TextRpgVER2
                     SoldOut = false;
 
                     //판매하면 reciptItem에서 삭제
-                    reciptItem.Remove(this);
+                    player.reciptItem.Remove(this);
                 }
                 else if (SoldOut == true && Equipped == true)
                 {
@@ -304,7 +309,7 @@ namespace TextRpgVER2
                             player.Gold += (int)(GetPrice * 0.8); //판매 후 골드 증가
 
                             //판매하면 reciptItem에서 삭제
-                            reciptItem.Remove(this); //구매한 아이템 리스트에서 삭제
+                            player.reciptItem.Remove(this); 
 
                             ItemSell(player); //판매 후 상점으로 이동
                             break;
@@ -436,12 +441,7 @@ namespace TextRpgVER2
             };
 
 
-            //구매한 아이템 리스트(SoldOut이 true인 아이템만 출력)
-            //아이템을 리스트화
-            public static List<Item> reciptItem = new List<Item>()
-            {
-                //아이템을 구매하면 여기에 add됨
-            };
+
 
         }
 
@@ -757,7 +757,7 @@ namespace TextRpgVER2
             //구매한 아이템=소지한 아이템
             //그럼 여기도 itemList가 아니라 reciptItem을 사용해야 함
 
-            Item.reciptItem.ForEach(item =>
+            player.reciptItem.ForEach(item =>
             {
                 Console.WriteLine($"-{item.EquipItem} {item.Name} \t| 공격력 +{item.Attack} \t| 방어력 +{item.Defense} \t|{item.Description}\t|가격: {item.GetPrice * 0.8}G");
             });
@@ -801,7 +801,7 @@ namespace TextRpgVER2
             int index = 1; //아이템 리스트 넘버링
 
             //reciptItem에서 장착할 아이템을 선택
-            Item.reciptItem.ForEach(item =>
+            player.reciptItem.ForEach(item =>
             {
                 Console.WriteLine($"{index++}. {item.EquipItem} {item.Name} \t| 공격력 +{item.Attack} \t| 방어력 +{item.Defense} \t|{item.Description}\t|가격: {item.GetPrice * 0.8}G");
             });
@@ -817,9 +817,9 @@ namespace TextRpgVER2
                 Clear();
                 Inventory();
             }
-            else if (Eselect > 0 && Eselect <= Item.reciptItem.Count)
+            else if (Eselect > 0 && Eselect <= player.reciptItem.Count)
             {
-                Item.reciptItem[Eselect - 1].Equip(); //장착 메서드 호출
+                player.reciptItem[Eselect - 1].Equip(); //장착 메서드 호출
             }
             else
             {
@@ -1021,7 +1021,7 @@ namespace TextRpgVER2
 
             //내가 가진 물건 중에서만 판매
 
-            Item.reciptItem.ForEach(item =>
+            player.reciptItem.ForEach(item =>
             {
                 Console.WriteLine($"{index++}. {item.EquipItem} {item.Name} \t| 공격력 +{item.Attack} \t| 방어력 +{item.Defense} \t|{item.Description}\t|가격: {item.GetPrice * 0.8}G");
             });
@@ -1036,11 +1036,11 @@ namespace TextRpgVER2
                 Clear();
                 Store();
             }
-            else if (Sellselect > 0 && Sellselect <= Item.reciptItem.Count)
+            else if (Sellselect > 0 && Sellselect <= player.reciptItem.Count)
             {
-                Console.WriteLine($"상점주인: 그 물건은 {Item.reciptItem[Sellselect - 1].GetPrice * 0.8}G에 사지. 팔텐가?");
+                Console.WriteLine($"상점주인: 그 물건은 {player.reciptItem[Sellselect - 1].GetPrice * 0.8}G에 사지. 팔텐가?");
                 Console.WriteLine("판매하시겠습니까? (Y/N)");
-                Item.reciptItem[Sellselect - 1].Sell(); //판매 메서드 호출
+                player.reciptItem[Sellselect - 1].Sell(); //판매 메서드 호출
             }
             else
             {
@@ -1347,7 +1347,15 @@ namespace TextRpgVER2
         //게임 저장
         public static void SaveGame(Player player)
         {
-            string saveData = JsonSerializer.Serialize(player);
+
+            // JsonSerializer 옵션 설정 (순환 참조 방지 및 읽기 쉽게 설정)
+            var options = new JsonSerializerOptions
+            {
+                WriteIndented = true,
+                ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve
+            };
+
+            string saveData = JsonSerializer.Serialize(player, options);
             File.WriteAllText("savegame.json", saveData);
             Console.WriteLine("게임이 저장되었습니다.");
         }
@@ -1358,7 +1366,14 @@ namespace TextRpgVER2
             if (File.Exists("savegame.json"))
             {
                 string saveData = File.ReadAllText("savegame.json");
-                return JsonSerializer.Deserialize<Player>(saveData);
+
+                // JsonSerializer 옵션 설정 (순환 참조 방지)
+                var options = new JsonSerializerOptions
+                {
+                    ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve
+                };
+
+                return JsonSerializer.Deserialize<Player>(saveData, options);
             }
             Console.WriteLine("저장된 게임이 없습니다.");
             

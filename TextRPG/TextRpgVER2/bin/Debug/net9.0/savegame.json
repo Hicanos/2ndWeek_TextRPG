@@ -1,1 +1,32 @@
-{"Level":2,"Name":"Teabag","Job":"\uAD81\uC218","Attack":8,"ItemAttack":0,"Defense":7,"ItemDefense":5,"Hp":72,"Gold":2950,"StoreCount":1,"Exp":189,"NeedExp":508}
+{
+  "$id": "1",
+  "Level": 1,
+  "Name": "\uD14C\uC2A4\uD130",
+  "Job": "\uAD81\uC218",
+  "Attack": 8,
+  "ItemAttack": 5,
+  "Defense": 7,
+  "ItemDefense": 0,
+  "Hp": 20,
+  "Gold": 1190,
+  "StoreCount": 1,
+  "Exp": 280,
+  "NeedExp": 501,
+  "reciptItem": {
+    "$id": "2",
+    "$values": [
+      {
+        "$id": "3",
+        "EquipItem": "[E]",
+        "Name": "\uCCAD\uB3D9 \uD65C",
+        "Price": "\uAD6C\uB9E4\uC644\uB8CC",
+        "GetPrice": 1500,
+        "Attack": 5,
+        "Defense": 0,
+        "Description": "\uCCAD\uB3D9\uC73C\uB85C \uB9CC\uB4E4\uC5B4\uC9C4 \uD65C\uC785\uB2C8\uB2E4.",
+        "SoldOut": true,
+        "Equipped": true
+      }
+    ]
+  }
+}
