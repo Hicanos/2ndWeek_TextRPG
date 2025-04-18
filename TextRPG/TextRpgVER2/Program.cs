@@ -587,7 +587,7 @@ namespace TextRpgVER2
                     StartNewGame();
                     break;
                 case 2:
-                    LoadGame(player);
+                    player = LoadGame();
                     Console.WriteLine("게임을 불러옵니다.");
                     Console.Clear();
                     GameStart(player); //불러온 게임 시작
@@ -1349,7 +1349,7 @@ namespace TextRpgVER2
         }
 
         //게임 불러오기
-        public static Player LoadGame(Player player)
+        public static Player LoadGame()
         {
             if (File.Exists("savegame.json"))
             {
