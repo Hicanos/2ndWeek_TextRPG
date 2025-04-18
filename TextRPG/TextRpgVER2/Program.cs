@@ -38,7 +38,7 @@ namespace TextRpgVER2
             public int Exp { get; set; } //경험치
             public int NeedExp { get; set; } //레벨업에 필요한 경험치
 
-
+           
             //매개변수가 있는 생성자
             //이름, 직업, 레벨, 공격력, 방어력, 체력, 골드, 아이템 공격력, 아이템 방어력, 상점 방문 횟수, 몬스터 처치 횟수, 경험치
             public Player(string name, string job, int level, int attack, int defense, int hp, int gold, int itemAttack, int itemDefense, int storeCount, int exp)
@@ -68,8 +68,8 @@ namespace TextRpgVER2
                     //필요 경험치보다 경험치가 적어질 때까지 반복
                     while (Exp >= NeedExp)
                     {
-                        Attack += (int)(Attack * 0.1f);
-                        Defense += (int)(Defense * 0.1f);
+                        Attack += (int)(Attack * 0.2f);
+                        Defense += (int)(Defense * 0.2f);
                         Level++;
                         Exp -= NeedExp; //레벨업 후 남은 경험치 유지
                         NeedExp = 500 + (Level * Level * Level); //다음 레벨업에 필요한 경험치 계산
@@ -176,6 +176,7 @@ namespace TextRpgVER2
             public string Description { get; set; }
             public bool SoldOut { get; set; }
             public bool Equipped { get; set; }
+
             //생성자
             public Item(string EqupItem, string name, string description, int price, int attack, int defense)
             {
@@ -203,6 +204,9 @@ namespace TextRpgVER2
                 SoldOut = false;
                 Equipped = false;
             }
+
+            //매개변수가 없는 기본 생성자 (역직렬화를 위해 필요)
+            public Item() { }
 
             //구매 메서드
             public void Buy()
