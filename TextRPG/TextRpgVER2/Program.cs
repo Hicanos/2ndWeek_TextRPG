@@ -1249,7 +1249,7 @@ namespace TextRpgVER2
         //던전 입장
         static void DungeonStart()
         {
-            Console.WriteLine("======================================");
+            Console.WriteLine("============================================");
             Console.WriteLine("그린티 마을 뒷편에는, 각종 던전으로 향할 수 있는 포탈이 있다.");
             Console.WriteLine("여러 모험가들이 던전으로 향하고, 돌아오고 있다.");
             Console.WriteLine("그린티 마을에서는 총 다섯 곳의 던전을 들어갈 수 있다.");
