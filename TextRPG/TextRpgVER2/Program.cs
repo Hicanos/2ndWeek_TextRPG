@@ -19,7 +19,7 @@ namespace TextRpgVER2
 
 
         //플레이어 클래스
-        class Player
+        public class Player
         {
             //레벨, 이름, 직업, 공격력, 아이템공격력, 방어력, 아이템 방어력, 체력, 골드
             public int level;
@@ -467,7 +467,7 @@ namespace TextRpgVER2
                 new Dungeon("바위산 던전", "거대한 바위들이 우뚝 솟아있는 바위산입니다.", 11, 1700),
                 new Dungeon("화산 던전", "활화산으로 불길이 치솟는 위험한 지역입니다.", 17, 2500),
                 new Dungeon("신비의 숲", "신비로운 풀과 나무들이 어우러진 숲입니다.", 40, 5000),
-                new Dungeon("마굴", "실패한 마법생물들이 가득한 던전입니다.", 100, 15000)
+                new Dungeon("마굴", "실패한 마법생물들이 가득한 던전입니다.", 200, 15000)
             };
 
             //던전 진행 메서드 (권장 방어력보다 낮으면 일정 확률로 실패함)
@@ -601,7 +601,7 @@ namespace TextRpgVER2
         { 
             //캐릭터 생성
             Console.WriteLine("============================================");
-            Console.WriteLine("게임을 시작합니다.\n 플레이어의 이름을 입력해주세요.");
+            Console.WriteLine("새로운 게임을 시작합니다.\n 플레이어의 이름을 입력해주세요.");
             Console.Write("이름: ");
             string name = Console.ReadLine(); //이름 입력
 
@@ -638,14 +638,15 @@ namespace TextRpgVER2
             player.name = name; //플레이어 이름 설정
             player.job = job.ToString(); //직업 설정//플레이어 직업 설정
 
+            Clear();
             GameStart(player); //게임 시작
         }
 
         static void GameStart(Player player)
         {
-            Console.WriteLine($"그린 티 마을에 어서오세요, {player.name}님!");
+            Console.WriteLine($"그린 티 마을");
             Console.WriteLine("============================================");
-            Console.WriteLine("마을의 초입부터 푸른 녹음이 감싸는 조용하고 평화로운 마을. \n 부드러운 바람에 실려 오는 풀내음과 찻잎의 향기가 마을 전체를 감싼다. \n마을의 건물들은 대부분 따뜻한 색의 목재건물로 지어져, 자연과 어우러지고, 아늑함을 준다.\n마을에 모여든 모험가들은 각자의 여정을 시작하고, 이어간다.\n");
+            Console.WriteLine("마을의 초입부터 푸른 녹음이 감싸는 조용하고 평화로운 마을. \n부드러운 바람에 실려 오는 풀내음과 찻잎의 향기가 마을 전체를 감싼다. \n마을의 건물들은 대부분 따뜻한 색의 목재건물로 지어져, 자연과 어우러지고, 아늑함을 준다.\n마을에 모여든 모험가들은 각자의 여정을 시작하고, 이어간다.\n");
             Console.WriteLine("여기서 할 수 있는 행동은 다음과 같습니다.");
             Console.WriteLine(" ");
             Console.WriteLine("1. 스테이터스");
@@ -1341,6 +1342,7 @@ namespace TextRpgVER2
             Console.WriteLine("게임이 저장되었습니다.");
         }
 
+        //게임 불러오기
         public static Player LoadGame(Player player)
         {
             if (File.Exists("savegame.json"))
@@ -1349,6 +1351,8 @@ namespace TextRpgVER2
                 return JsonSerializer.Deserialize<Player>(saveData);
             }
             Console.WriteLine("저장된 게임이 없습니다.");
+            
+            StartNewGame();
             return null;
         }
 

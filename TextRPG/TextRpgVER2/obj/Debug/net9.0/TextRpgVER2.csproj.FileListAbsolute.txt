@@ -13,3 +13,6 @@ D:\GitHub\2ndWeek_TextRPG\TextRPG\TextRpgVER2\obj\Debug\net9.0\refint\TextRpgVER
 D:\GitHub\2ndWeek_TextRPG\TextRPG\TextRpgVER2\obj\Debug\net9.0\TextRpgVER2.pdb
 D:\GitHub\2ndWeek_TextRPG\TextRPG\TextRpgVER2\obj\Debug\net9.0\TextRpgVER2.genruntimeconfig.cache
 D:\GitHub\2ndWeek_TextRPG\TextRPG\TextRpgVER2\obj\Debug\net9.0\ref\TextRpgVER2.dll
+D:\GitHub\2ndWeek_TextRPG\TextRPG\TextRpgVER2\bin\Debug\net9.0\Newtonsoft.Json.dll
+D:\GitHub\2ndWeek_TextRPG\TextRPG\TextRpgVER2\obj\Debug\net9.0\TextRpgVER2.csproj.AssemblyReference.cache
+D:\GitHub\2ndWeek_TextRPG\TextRPG\TextRpgVER2\obj\Debug\net9.0\TextRpgV.A738EFD2.Up2Date
