@@ -3,6 +3,7 @@ using System.ComponentModel.Design;
 using System.Data;
 using System.Numerics;
 using System.Xml.Linq;
+using System.Text.Json;
 
 namespace TextRpgVER2
 {
@@ -38,6 +39,7 @@ namespace TextRpgVER2
             public int exp; //경험치
             public int needExp; //레벨업에 필요한 경험치
 
+
             //생성자
             //이름, 직업, 레벨, 공격력, 방어력, 체력, 골드, 아이템 공격력, 아이템 방어력, 상점 방문 횟수, 몬스터 처치 횟수, 경험치
             public Player(string name, string job, int level, int attack, int defense, int hp, int gold, int itemAttack, int itemDefense, int storecount, int exp)
@@ -53,7 +55,7 @@ namespace TextRpgVER2
                 this.itemDefense = itemDefense;
                 this.storeCount = storecount;
                 this.exp = exp;
-                needExp = 125 + (level * level * level); //레벨업에 필요한 경험치 계산
+                needExp = 500 + (level * level * level); //레벨업에 필요한 경험치 계산
             }
 
             //레벨업 메서드-매 몬스터 처치 시 경험치 증가, 레벨업 조건 확인
@@ -569,9 +571,40 @@ namespace TextRpgVER2
         static void Main(string[] args)
         {
             //시작 화면
+            Console.WriteLine("1. 새로하기");
+            Console.WriteLine("2. 불러오기");
+            Console.WriteLine("3. 종료");
+
+            int select = int.Parse(Console.ReadLine());
+            switch (select)
+            {
+                case 1:
+                    Console.WriteLine("새 게임을 시작합니다.");
+                    Console.Clear();
+                    StartNewGame();
+                    break;
+                case 2:
+                    LoadGame(player);
+                    break;
+                case 3:
+                    Console.WriteLine("게임을 종료합니다.");
+                    Environment.Exit(0);
+                    break;
+                default:
+                    Console.WriteLine("잘못된 입력입니다.");
+                    Main(args);
+                    break;
+            }
+        }
+
+        static void StartNewGame()
+        { 
+            //캐릭터 생성
+            Console.WriteLine("============================================");
             Console.WriteLine("게임을 시작합니다.\n 플레이어의 이름을 입력해주세요.");
             Console.Write("이름: ");
             string name = Console.ReadLine(); //이름 입력
+
             Console.WriteLine("직업을 선택해주세요.\n 1. 전사\n 2. 마법사\n 3. 궁수");
             Console.Write("직업: ");
             //번호에 따라 맞는 직업을 job에 입력, enum 사용
@@ -597,7 +630,7 @@ namespace TextRpgVER2
             else
             {
                 Console.WriteLine("잘못된 입력입니다.");
-                Main(args);
+                GameStart(player);
             }
 
 
@@ -720,6 +753,7 @@ namespace TextRpgVER2
 
             Console.WriteLine(" ");
             Console.WriteLine("1. 장비관리");
+            Console.WriteLine("2. 일기장");
             Console.WriteLine("0. 나가기");
             Console.Write("입력: ");
             string Iselect = Console.ReadLine();
@@ -728,6 +762,12 @@ namespace TextRpgVER2
             {
                 case "1":
                     Equipment();
+                    break;
+                case "2":
+                    Console.WriteLine("지금까지의 모험을 기록했다.");
+                    SaveGame(player);
+                    Clear();
+                    Inventory();
                     break;
                 case "0":
                     Console.WriteLine("가방을 닫았다.");
@@ -1291,7 +1331,26 @@ namespace TextRpgVER2
                     break;
             }
 
-        }        
+        }
+
+        //게임 저장
+        public static void SaveGame(Player player)
+        {
+            string saveData = JsonSerializer.Serialize(player);
+            File.WriteAllText("savegame.json", saveData);
+            Console.WriteLine("게임이 저장되었습니다.");
+        }
+
+        public static Player LoadGame(Player player)
+        {
+            if (File.Exists("savegame.json"))
+            {
+                string saveData = File.ReadAllText("savegame.json");
+                return JsonSerializer.Deserialize<Player>(saveData);
+            }
+            Console.WriteLine("저장된 게임이 없습니다.");
+            return null;
+        }
 
     }
 }
