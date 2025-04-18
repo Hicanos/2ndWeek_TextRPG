@@ -22,59 +22,61 @@ namespace TextRpgVER2
         public class Player
         {
             //레벨, 이름, 직업, 공격력, 아이템공격력, 방어력, 아이템 방어력, 체력, 골드
-            public int level;
-            public string name;
-            public string job;
+            public int Level { get; set; }
+            public string Name { get; set; }
+            public string Job { get; set; }
 
-            public int attack;
-            public int itemAttack;
-            public int defense;
-            public int itemDefense;
+            public int Attack { get; set; }
+            public int ItemAttack { get; set; }
+            public int Defense { get; set; }
+            public int ItemDefense { get; set; }
 
-            public int hp;
-            public int gold;
+            public int Hp { get; set; }
+            public int Gold { get; set; }
 
-            public int storeCount; //상점 방문 횟수
+            public int StoreCount { get; set; }//상점 방문 횟수
+            public int Exp { get; set; } //경험치
+            public int NeedExp { get; set; } //레벨업에 필요한 경험치
 
-            public int exp; //경험치
-            public int needExp; //레벨업에 필요한 경험치
 
-
-            //생성자
+            //매개변수가 있는 생성자
             //이름, 직업, 레벨, 공격력, 방어력, 체력, 골드, 아이템 공격력, 아이템 방어력, 상점 방문 횟수, 몬스터 처치 횟수, 경험치
-            public Player(string name, string job, int level, int attack, int defense, int hp, int gold, int itemAttack, int itemDefense, int storecount, int exp)
+            public Player(string name, string job, int level, int attack, int defense, int hp, int gold, int itemAttack, int itemDefense, int storeCount, int exp)
             {
-                this.name = name;
-                this.job = job;
-                this.level = level;
-                this.attack = attack;
-                this.defense = defense;
-                this.hp = hp;
-                this.gold = gold;
-                this.itemAttack = itemAttack;
-                this.itemDefense = itemDefense;
-                this.storeCount = storecount;
-                this.exp = exp;
-                needExp = 500 + (level * level * level); //레벨업에 필요한 경험치 계산
+                Name = name;
+                Job = job;
+                Level = level;
+                Attack = attack;
+                Defense = defense;
+                Hp = hp;
+                Gold = gold;
+                ItemAttack = itemAttack;
+                ItemDefense = itemDefense;
+                StoreCount = storeCount;
+                Exp = exp;
+                NeedExp = 500 + (level * level * level); // 레벨업에 필요한 경험치 계산
             }
+
+            // 매개변수가 없는 기본 생성자 (역직렬화를 위해 필요)
+            public Player() { }
 
             //레벨업 메서드-매 몬스터 처치 시 경험치 증가, 레벨업 조건 확인
             public void LevelUp()
             {
-                if (exp >= needExp)
+                if (Exp >= NeedExp)
                 {
                     //필요 경험치보다 경험치가 적어질 때까지 반복
-                    while (exp >= needExp)
+                    while (Exp >= NeedExp)
                     {
-                        attack += (int)(attack * 0.1f);
-                        defense += (int)(defense * 0.1f);
-                        level++;
-                        exp -= needExp; //레벨업 후 남은 경험치 유지
-                        needExp = 500 + (level * level * level); //다음 레벨업에 필요한 경험치 계산
+                        Attack += (int)(Attack * 0.1f);
+                        Defense += (int)(Defense * 0.1f);
+                        Level++;
+                        Exp -= NeedExp; //레벨업 후 남은 경험치 유지
+                        NeedExp = 500 + (Level * Level * Level); //다음 레벨업에 필요한 경험치 계산
                         Console.WriteLine("============================================");
-                        Console.WriteLine($"{name}의 레벨이 올랐습니다! \n 현재 레벨: {level}");
-                        Console.WriteLine($"공격력: {attack + itemAttack} (+{itemAttack})");
-                        Console.WriteLine($"방어력: {defense + itemAttack} (+{itemDefense})");
+                        Console.WriteLine($"{Name}의 레벨이 올랐습니다! \n 현재 레벨: {Level}");
+                        Console.WriteLine($"공격력: {Attack + ItemAttack} (+{ItemAttack})");
+                        Console.WriteLine($"방어력: {Defense + ItemAttack} (+{ItemDefense})");
                         Console.WriteLine("============================================");
                     }
 
@@ -102,22 +104,22 @@ namespace TextRpgVER2
                         Console.WriteLine("여관 주인: 방에 치료비까지 다해서 1000G야.");
                         Console.WriteLine("여관 주인: 나도 먹고 살아야지.");
 
-                        if (player.gold >= 1000)
+                        if (player.Gold >= 1000)
                         {
-                            player.gold -= 1000; //골드 차감
-                            Console.WriteLine($"{player.name}님의 골드: {player.gold}G");
-                            Console.WriteLine($"{player.name}의 체력이 모두 회복되었습니다.");
+                            player.Gold -= 1000; //골드 차감
+                            Console.WriteLine($"{player.Name}님의 골드: {player.Gold}G");
+                            Console.WriteLine($"{player.Name}의 체력이 모두 회복되었습니다.");
                             Console.WriteLine("여관 주인: 다음부터는 무리하지 마.");
-                            player.hp = 100; //체력 회복                            
+                            player.Hp = 100; //체력 회복                            
                         }
-                        else if (player.gold < 1000 && player.gold >= 500)
+                        else if (player.Gold < 1000 && player.Gold >= 500)
                         {
                             Console.WriteLine("여관 주인: 돈이 부족한 거야?");
                             Console.WriteLine("여관 주인: 어쩔 수 없네. 지금 가진 돈이라도 줘.");
 
-                            int plusHP = 100 - (1000 - player.gold) / 10; //남은 골드가 600이면 60 회복
-                            player.hp += plusHP; //체력 회복
-                            player.gold = 0; //골드 전액 차감
+                            int plusHP = 100 - (1000 - player.Gold) / 10; //남은 골드가 600이면 60 회복
+                            player.Hp += plusHP; //체력 회복
+                            player.Gold = 0; //골드 전액 차감
                         }
                         else
                         {
@@ -128,8 +130,8 @@ namespace TextRpgVER2
                             Console.WriteLine("   ");
                             Console.WriteLine("여관 주인에게서 300G를 받았습니다.");
                             Console.WriteLine("여관 주인: 미안하면 다음에 와서 많이 사줘.");
-                            player.hp = 45; //체력 회복
-                            player.gold += 300; //골드 지급
+                            player.Hp = 45; //체력 회복
+                            player.Gold += 300; //골드 지급
                         }
 
                         Tarvern(); //여관으로 이동
@@ -207,11 +209,11 @@ namespace TextRpgVER2
             {
                 if (SoldOut == false)
                 {
-                    if (player.gold >= GetPrice)
+                    if (player.Gold >= GetPrice)
                     {
                         Console.WriteLine("상점 주인: 크하하, 어때, 마음에 드나?");
                         Console.WriteLine($"{Name}을(를) 구매하였습니다.");
-                        player.gold -= GetPrice; //구매 후 골드 감소
+                        player.Gold -= GetPrice; //구매 후 골드 감소
                         SoldOut = true; //판매 완료
                         Price = "구매완료"; //구매가 완료로 변경
 
@@ -227,8 +229,8 @@ namespace TextRpgVER2
                             case "Y":
                                 Console.WriteLine($"{Name}을(를) 장착하였습니다.");
                                 //플레이어의 공격력과 방어력 증가
-                                player.itemAttack += Attack;
-                                player.itemDefense += Defense;
+                                player.ItemAttack += Attack;
+                                player.ItemDefense += Defense;
 
                                 //장착된 아이템의 리스트 넘버링을 [E]로 출력
                                 EquipItem = "[E]"; //장착 후 아이템 리스트에서 [ ] 제거
@@ -268,7 +270,7 @@ namespace TextRpgVER2
                 if (SoldOut == true && Equipped == false)
                 {
                     Console.WriteLine($"{Name}을(를) 판매하였습니다.");
-                    player.gold += (int)(GetPrice * 0.8); //판매 후 골드 증가
+                    player.Gold += (int)(GetPrice * 0.8); //판매 후 골드 증가
                     Price = GetPrice.ToString() + "G"; //"판매완료"를 다시 원가로 표시
                     SoldOut = false;
 
@@ -293,9 +295,9 @@ namespace TextRpgVER2
                             EquipItem = "[ ]"; //장착 해제 후 아이템 리스트에서 [E] 제거
                             Price = GetPrice.ToString() + "G"; //판매 후 가격 초기화
 
-                            player.itemAttack -= Attack; //플레이어의 공격력 감소
-                            player.itemDefense -= Defense; //플레이어의 방어력 감소
-                            player.gold += (int)(GetPrice * 0.8); //판매 후 골드 증가
+                            player.ItemAttack -= Attack; //플레이어의 공격력 감소
+                            player.ItemDefense -= Defense; //플레이어의 방어력 감소
+                            player.Gold += (int)(GetPrice * 0.8); //판매 후 골드 증가
 
                             //판매하면 reciptItem에서 삭제
                             reciptItem.Remove(this); //구매한 아이템 리스트에서 삭제
@@ -330,8 +332,8 @@ namespace TextRpgVER2
                 {
                     Console.WriteLine($"{Name}을(를) 장착하였습니다.");
                     //플레이어의 아이템 공격력과 방어력 증가
-                    player.itemAttack += Attack;
-                    player.itemDefense += Defense;
+                    player.ItemAttack += Attack;
+                    player.ItemDefense += Defense;
 
                     //장착된 아이템의 리스트 넘버링을 [E]로 출력
                     EquipItem = "[E]";
@@ -343,8 +345,8 @@ namespace TextRpgVER2
                     Console.WriteLine($"{Name}의 장착을 해제하였습니다.");
 
                     //플레이어의 공격력과 방어력 감소
-                    player.itemAttack -= Attack;
-                    player.itemDefense -= Defense;
+                    player.ItemAttack -= Attack;
+                    player.ItemDefense -= Defense;
 
                     //장착된 아이템의 리스트 넘버링을 [ ]로 출력
                     EquipItem = "[ ]";
@@ -485,24 +487,25 @@ namespace TextRpgVER2
                         Console.WriteLine("던전 공략을 시작합니다.");
                         Console.WriteLine("============================================");
                         //실패는 방어력이 권장 방어력보다 낮을 때만 확률적으로 발생
-                        if (player.defense + player.itemDefense <= recommendDefense)
+                        if (player.Defense + player.ItemDefense <= recommendDefense)
                         {
+                            int debuff = recommendDefense - (player.Defense + player.ItemDefense); //방어력 차이
                             int clear = new Random().Next(1, 101); //던전 공략 실패 확률 1~100
-                            if (clear <= 40) //40% 확률로 실패
+                            if (clear <= 40+debuff) //40%+방어력 차이만큼의 확률로 실패(차이가 많이 날 수록 확률 상승)
                             {
                                 Console.WriteLine("던전 공략에 실패했습니다.");
-                                Console.WriteLine($"체력이 {50 + recommendDefense - (player.defense + player.itemDefense)}감소합니다.");
-                                player.hp -= (int)(50 + recommendDefense - (player.defense + player.itemDefense)); //체력 감소
-                                if (player.hp <= 0)
+                                Console.WriteLine($"체력이 {50 + recommendDefense - (player.Defense + player.ItemDefense)}감소합니다.");
+                                player.Hp -= (int)(50 + recommendDefense - (player.Defense + player.ItemDefense)); //체력 감소
+                                if (player.Hp <= 0)
                                 {
-                                    player.hp = 0; //마이너스가 되더라도 체력 0으로 설정
+                                    player.Hp = 0; //마이너스가 되더라도 체력 0으로 설정
                                     Console.WriteLine("============================================");
                                     Console.WriteLine("공략은 실패했다. 하지만….");
-                                    Console.WriteLine($"{player.name}님의 남은 체력: 0");
+                                    Console.WriteLine($"{player.Name}님의 남은 체력: 0");
                                     player.GameOver(); //게임 오버 메서드 호출
                                     break;
                                 }
-                                Console.WriteLine($"{player.name}님의 체력: {player.hp}");
+                                Console.WriteLine($"{player.Name}님의 체력: {player.Hp}");
                                 Console.WriteLine("============================================");
 
                                 DungeonStart(); //던전입구로 이동 
@@ -512,28 +515,28 @@ namespace TextRpgVER2
                         //나머지는 성공                        
                         //체력 소모 값=20~35에 방어력에 따른 보정치 발생
                         int minusHP = new Random().Next(20, 36);
-                        player.hp -= (int)(minusHP - ((player.defense + player.itemDefense) - 5));
+                        player.Hp -= (int)(minusHP - ((player.Defense + player.ItemDefense) - 5));
 
                         //공략에 성공해도 체력이 0이 되면 행동불능->실패
-                        if (player.hp <= 0)
+                        if (player.Hp <= 0)
                         {
-                            player.hp = 0; //마이너스가 되더라도 체력 0으로 설정
+                            player.Hp = 0; //마이너스가 되더라도 체력 0으로 설정
                             Console.WriteLine("============================================");
                             Console.WriteLine("공략은 성공했다. 하지만….");
-                            Console.WriteLine($"{player.name}님의 남은 체력: 0");
+                            Console.WriteLine($"{player.Name}님의 남은 체력: 0");
                             player.GameOver(); //게임 오버 메서드 호출
                             break;
                         }
                         Console.WriteLine("던전 공략에 성공했습니다.");
                         Console.WriteLine("============================================");
-                        Console.WriteLine($"{player.name}님의 체력이 {minusHP} 감소했습니다.");
-                        Console.WriteLine($"{player.name}님의 체력: {player.hp}");
+                        Console.WriteLine($"{player.Name}님의 체력이 {minusHP} 감소했습니다.");
+                        Console.WriteLine($"{player.Name}님의 체력: {player.Hp}");
 
                         //보상은 공격력~공격력*2 %까지 보정됨 (공격력 10이면 10%~20%까지 보정됨)
-                        int rewardPercent = (int)(player.attack + player.itemAttack);
+                        int rewardPercent = (int)(player.Attack + player.ItemAttack);
                         int reward = new Random().Next(rewardPercent, rewardPercent * 2 + 1);
-                        player.gold += (int)(rewardGold * (1 + reward * 0.01f)); //던전 보상 골드 지급 (기본 보상+보정치) 즉, 리워드가 20%로 결정되면 1.2배 지급
-                        player.exp += (int)(minusHP * 10); //감소한 체력의 10배 만큼 경험치 지급
+                        player.Gold += (int)(rewardGold * (1 + reward * 0.01f)); //던전 보상 골드 지급 (기본 보상+보정치) 즉, 리워드가 20%로 결정되면 1.2배 지급
+                        player.Exp += (int)(minusHP * 10); //감소한 체력의 10배 만큼 경험치 지급
 
                         Console.WriteLine("==던전 결과==");
                         Console.WriteLine($"획득 Gold:{(int)(rewardGold * (1 + reward * 0.01f))}");
@@ -585,6 +588,9 @@ namespace TextRpgVER2
                     break;
                 case 2:
                     LoadGame(player);
+                    Console.WriteLine("게임을 불러옵니다.");
+                    Console.Clear();
+                    GameStart(player); //불러온 게임 시작
                     break;
                 case 3:
                     Console.WriteLine("게임을 종료합니다.");
@@ -614,18 +620,18 @@ namespace TextRpgVER2
             //선택한 직업에 따라 스탯 초기화
             if (job == Job.전사)
             {
-                player.attack = 5;
-                player.defense = 10;
+                player.Attack = 5;
+                player.Defense = 10;
             }
             else if (job == Job.마법사)
             {
-                player.attack = 10;
-                player.defense = 5;
+                player.Attack = 10;
+                player.Defense = 5;
             }
             else if (job == Job.궁수)
             {
-                player.attack = 8;
-                player.defense = 7;
+                player.Attack = 8;
+                player.Defense = 7;
             }
             else
             {
@@ -635,8 +641,8 @@ namespace TextRpgVER2
 
 
             Console.WriteLine($"{name}님, 게임을 시작합니다.");
-            player.name = name; //플레이어 이름 설정
-            player.job = job.ToString(); //직업 설정//플레이어 직업 설정
+            player.Name = name; //플레이어 이름 설정
+            player.Job = job.ToString(); //직업 설정//플레이어 직업 설정
 
             Clear();
             GameStart(player); //게임 시작
@@ -673,16 +679,16 @@ namespace TextRpgVER2
                     break;
                 case 3:
                     Clear();
-                    player.storeCount += 1;
+                    player.StoreCount += 1;
                     Store();
-                    Console.WriteLine($"문에 달린 경첩이 끼익거리며 열린다. 소리를 들은 상인이 호탕하게 웃으며 {player.name}을 맞이한다.");
+                    Console.WriteLine($"문에 달린 경첩이 끼익거리며 열린다. 소리를 들은 상인이 호탕하게 웃으며 {player.Name}을 맞이한다.");
                     Console.WriteLine(" ");
                     break;
                 case 4:
                     Clear();
                     Tarvern();
                     Console.WriteLine("맑은 종소리가 울린다. 분주하게 움직이던 직원이 큰 소리로 외친다.");
-                    Console.WriteLine("직원: 어서오세요! '한 잔의 휴식'입니다!");
+                    Console.WriteLine("직원: 어서오세요! '황금 고래의 휴식'입니다!");
                     break;
                 case 5:
                     Clear();
@@ -706,15 +712,15 @@ namespace TextRpgVER2
             //플레이어 스탯 반영
             //장비 착용 시 공격력, 방어력 증가를 표시함 (공격력 7 장비를 장비시, 기본값+장비보정치 (+장비보정치)로 표시)
 
-            Console.WriteLine($"{player.name}님의 현재 상태입니다.");
+            Console.WriteLine($"{player.Name}님의 현재 상태입니다.");
             Console.WriteLine("==Status==");
-            Console.WriteLine($"이름: {player.name}");
-            Console.WriteLine($"레벨: {player.level}");
-            Console.WriteLine($"직업: {player.job}");
-            Console.WriteLine($"공격력: {player.attack + player.itemAttack} (+{player.itemAttack})");
-            Console.WriteLine($"방어력: {player.defense + player.itemDefense} (+{player.itemDefense})");
-            Console.WriteLine($"체력: {player.hp}");
-            Console.WriteLine($"골드: {player.gold}");
+            Console.WriteLine($"이름: {player.Name}");
+            Console.WriteLine($"레벨: {player.Level}");
+            Console.WriteLine($"직업: {player.Job}");
+            Console.WriteLine($"공격력: {player.Attack + player.ItemAttack} (+{player.ItemAttack})");
+            Console.WriteLine($"방어력: {player.Defense + player.ItemDefense} (+{player.ItemDefense})");
+            Console.WriteLine($"체력: {player.Hp}");
+            Console.WriteLine($"골드: {player.Gold}");
 
             Console.WriteLine("원하는 행동을 선택해주세요.");
             Console.WriteLine("1. 인벤토리");
@@ -824,47 +830,47 @@ namespace TextRpgVER2
         {
             Console.WriteLine("상점은 오래되었지만 깔끔하다. \n여러 사람이 오가며 맨질하게 닳은 바닥은, 이곳이 많은 모험가들을 맞이했음을 알려준다. \n진열된 물건들 중에서는 낡은 무기들도 있지만, \n상당히 좋은 품질의 무기와 방어구도 눈에 들어온다.");
             Console.WriteLine(" ");
-            if (player.storeCount == 1)
+            if (player.StoreCount == 1)
             {
                 Console.WriteLine("상점 주인: 오, 처음보는 얼굴이군. 새로운 모험가인가? 어서와, 어서와!");
                 Console.WriteLine("상점 주인: 필요한 게 있으면 얼마든지 말하라고!");
             }
-            else if (player.storeCount > 1 && player.storeCount < 10)
+            else if (player.StoreCount > 1 && player.StoreCount < 10)
             {
                 Console.WriteLine("상점 주인: 오, 또 왔군. 이번엔 무엇을 사러왔나?");
             }
-            else if (player.storeCount == 10)
+            else if (player.StoreCount == 10)
             {
-                Console.WriteLine($"상점 주인: 이야, {player.name} 아닌가! 오늘은 무슨 일이야?");
+                Console.WriteLine($"상점 주인: 이야, {player.Name} 아닌가! 오늘은 무슨 일이야?");
                 Console.WriteLine("상점 주인: 이렇게 자주 와주니 내가 다 기쁘군.");
                 Console.WriteLine("단골에게는, 특별 상점을 열고 있다네. 조금 비싸긴 하지만 말이야! 하하!");
             }
             else
             {
-                Console.WriteLine($"상점 주인: 어서오게, {player.name}!");
+                Console.WriteLine($"상점 주인: 어서오게, {player.Name}!");
                 Console.WriteLine("상점 주인: 오늘 모험은 어땠는가?");
             }
             Console.WriteLine("=======================================");
-            Console.WriteLine($"{player.name}님의 골드: {player.gold}G");
+            Console.WriteLine($"{player.Name}님의 골드: {player.Gold}G");
             Console.WriteLine("=======================================");
 
             Console.WriteLine("==Store==");
 
-            if (Job.전사.ToString() == player.job)
+            if (Job.전사.ToString() == player.Job)
             {
                 Item.itemList_Warrior.ForEach(item =>
                 {
                     Console.WriteLine($"{item.Name} \t| 공격력 +{item.Attack} \t| 방어력 +{item.Defense} \t|{item.Description}\t|가격: {item.Price}");
                 });
             }
-            else if (Job.마법사.ToString() == player.job)
+            else if (Job.마법사.ToString() == player.Job)
             {
                 Item.itemList_Wizard.ForEach(item =>
                 {
                     Console.WriteLine($"{item.Name} \t| 공격력 +{item.Attack} \t| 방어력 +{item.Defense} \t|{item.Description}\t|가격: {item.Price}");
                 });
             }
-            else if (Job.궁수.ToString() == player.job)
+            else if (Job.궁수.ToString() == player.Job)
             {
                 Item.itemList_Archer.ForEach(item =>
                 {
@@ -877,7 +883,7 @@ namespace TextRpgVER2
             Console.WriteLine("  ");
             Console.WriteLine("1. 아이템 구매");
             Console.WriteLine("2. 아이템 판매");
-            if (player.storeCount >= 10)
+            if (player.StoreCount >= 10)
             {
                 Console.WriteLine("3. 특별 상점");
             }
@@ -892,7 +898,7 @@ namespace TextRpgVER2
                     ItemSell(player);
                     break;
                 case "3":
-                    if (player.storeCount >= 10)
+                    if (player.StoreCount >= 10)
                     {
                         Console.WriteLine("상점 주인: 하핫, 단골에게는 얼마든지!");
                         Console.WriteLine("상점 주인: 특별 상품들은 기존에 파는 물건들 보다 훨씬 성능이 좋지.");
@@ -922,7 +928,7 @@ namespace TextRpgVER2
         static void ItemPurchase(Player player)
         {
             Console.WriteLine("=======================================");
-            Console.WriteLine($"{player.name}님의 골드: {player.gold}G");
+            Console.WriteLine($"{player.Name}님의 골드: {player.Gold}G");
             Console.WriteLine("=======================================");
             Console.WriteLine("  \n");
             Console.WriteLine($"상점 주인: 자, 자, 원하는 걸 골라봐.");
@@ -932,21 +938,21 @@ namespace TextRpgVER2
 
 
             int index = 1; //아이템 리스트 넘버링
-            if (Job.전사.ToString() == player.job)
+            if (Job.전사.ToString() == player.Job)
             {
                 Item.itemList_Warrior.ForEach(item =>
                 {
                     Console.WriteLine($"{index++}. {item.Name} \t| 공격력 +{item.Attack} \t| 방어력 +{item.Defense} \t|{item.Description}\t|가격: {item.Price}");
                 });
             }
-            else if (Job.마법사.ToString() == player.job)
+            else if (Job.마법사.ToString() == player.Job)
             {
                 Item.itemList_Wizard.ForEach(item =>
                 {
                     Console.WriteLine($"{index++}. {item.Name} \t| 공격력 +{item.Attack} \t| 방어력 +{item.Defense} \t|{item.Description}\t|가격: {item.Price}");
                 });
             }
-            else if (Job.궁수.ToString() == player.job)
+            else if (Job.궁수.ToString() == player.Job)
             {
                 Item.itemList_Archer.ForEach(item =>
                 {
@@ -970,15 +976,15 @@ namespace TextRpgVER2
             }
             else if (select > 0)
             {
-                if (Job.전사.ToString() == player.job && select <= Item.itemList_Warrior.Count)
+                if (Job.전사.ToString() == player.Job && select <= Item.itemList_Warrior.Count)
                 {
                     Item.itemList_Warrior[select - 1].Buy(); //구매 메서드 호출
                 }
-                else if (Job.마법사.ToString() == player.job && select <= Item.itemList_Wizard.Count)
+                else if (Job.마법사.ToString() == player.Job && select <= Item.itemList_Wizard.Count)
                 {
                     Item.itemList_Wizard[select - 1].Buy(); //구매 메서드 호출
                 }
-                else if (Job.궁수.ToString() == player.job && select <= Item.itemList_Archer.Count)
+                else if (Job.궁수.ToString() == player.Job && select <= Item.itemList_Archer.Count)
                 {
                     Item.itemList_Archer[select - 1].Buy(); //구매 메서드 호출
                 }
@@ -1001,7 +1007,7 @@ namespace TextRpgVER2
         static void ItemSell(Player player)
         {
             Console.WriteLine("=======================================");
-            Console.WriteLine($"{player.name}님의 골드: {player.gold}G");
+            Console.WriteLine($"{player.Name}님의 골드: {player.Gold}G");
             Console.WriteLine("=======================================");
             Console.WriteLine("  \n");
             Console.WriteLine($"상점 주인: 뭔가 팔 물건이라도 있나?");
@@ -1044,28 +1050,28 @@ namespace TextRpgVER2
         static void SpecialStore()
         {
             Console.WriteLine("=======================================");
-            Console.WriteLine($"{player.name}님의 골드: {player.gold}G");
+            Console.WriteLine($"{player.Name}님의 골드: {player.Gold}G");
             Console.WriteLine("=======================================");
             Console.WriteLine("  \n");
             Console.WriteLine($"상점 주인: 이거 아무한테나 보여주는 물건이 아니야.");
             Console.WriteLine("==Buy==");
 
             int index = 1; //아이템 리스트 넘버링
-            if (Job.전사.ToString() == player.job)
+            if (Job.전사.ToString() == player.Job)
             {
                 Item.specialItemList_Warrior.ForEach(item =>
                 {
                     Console.WriteLine($"{index++}. {item.Name} \t| 공격력 +{item.Attack} \t| 방어력 +{item.Defense} \t|{item.Description}\t|가격: {item.Price}");
                 });
             }
-            else if (Job.마법사.ToString() == player.job)
+            else if (Job.마법사.ToString() == player.Job)
             {
                 Item.specialItemList_Wizard.ForEach(item =>
                 {
                     Console.WriteLine($"{index++}. {item.Name} \t| 공격력 +{item.Attack} \t| 방어력 +{item.Defense} \t|{item.Description}\t|가격: {item.Price}");
                 });
             }
-            else if (Job.궁수.ToString() == player.job)
+            else if (Job.궁수.ToString() == player.Job)
             {
                 Item.specialItemList_Archer.ForEach(item =>
                 {
@@ -1085,15 +1091,15 @@ namespace TextRpgVER2
             }
             else if (select > 0)
             {
-                if (Job.전사.ToString() == player.job && select <= Item.specialItemList_Warrior.Count)
+                if (Job.전사.ToString() == player.Job && select <= Item.specialItemList_Warrior.Count)
                 {
                     Item.specialItemList_Warrior[select - 1].Buy(); //구매 메서드 호출
                 }
-                else if (Job.마법사.ToString() == player.job && select <= Item.specialItemList_Wizard.Count)
+                else if (Job.마법사.ToString() == player.Job && select <= Item.specialItemList_Wizard.Count)
                 {
                     Item.specialItemList_Wizard[select - 1].Buy(); 
                 }
-                else if (Job.궁수.ToString() == player.job && select <= Item.specialItemList_Archer.Count)
+                else if (Job.궁수.ToString() == player.Job && select <= Item.specialItemList_Archer.Count)
                 {
                     Item.specialItemList_Archer[select - 1].Buy(); 
                 }
@@ -1154,7 +1160,7 @@ namespace TextRpgVER2
         static void Meal()
         {
             Console.WriteLine("=======================================");
-            Console.WriteLine($"{player.name}님의 골드: {player.gold}G");
+            Console.WriteLine($"{player.Name}님의 골드: {player.Gold}G");
             Console.WriteLine("=======================================");            
             Console.WriteLine("여관 주인: 메뉴가 정해지면 말해줘.");
             Console.WriteLine("==Menu==");
@@ -1171,10 +1177,10 @@ namespace TextRpgVER2
             switch (select)
             {
                 case 1:
-                    
+                    Tarvern(); //구현 전까지는 여관으로 돌아감
                     break;
                 case 2:
-                    
+                    Tarvern();
                     break;
                 case 0:
                     Console.WriteLine("여관 주인: 마음이 바뀐거야?");
@@ -1193,7 +1199,7 @@ namespace TextRpgVER2
         {
             Console.WriteLine("여관 주인: 방은 500G야.");
             Console.WriteLine("=======================================");
-            Console.WriteLine($"{player.name}님의 골드: {player.gold}G");
+            Console.WriteLine($"{player.Name}님의 골드: {player.Gold}G");
             Console.WriteLine("=======================================");
             Console.WriteLine("여관 주인: 방 하나 내어줄까?(Y/N)");
             string answer = Console.ReadLine();
@@ -1201,15 +1207,15 @@ namespace TextRpgVER2
             switch (answer)
             {
                 case "Y":
-                    if (player.gold >= 500)
+                    if (player.Gold >= 500)
                     {
                         Console.WriteLine("여관 주인: 방은 2층에 있어.");
                         Console.WriteLine("여관 주인: 편히 쉬어.");
-                        player.gold -= 500; //골드 차감
-                        player.hp = 100; //체력 회복
-                        Console.WriteLine($"{player.name}의 체력이 회복되었습니다.");
+                        player.Gold -= 500; //골드 차감
+                        player.Hp = 100; //체력 회복
+                        Console.WriteLine($"{player.Name}의 체력이 회복되었습니다.");
                         Console.WriteLine("=======================================");
-                        Console.WriteLine($"{player.name}님의 골드: {player.gold}G");
+                        Console.WriteLine($"{player.Name}님의 골드: {player.Gold}G");
                         Console.WriteLine("=======================================");
                         Clear();
                         Tarvern();
