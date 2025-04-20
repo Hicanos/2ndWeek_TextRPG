@@ -682,11 +682,11 @@ namespace TextRpgVER2
         { 
             //캐릭터 생성
             Console.WriteLine("============================================");
-            Console.WriteLine("【새로운 게임을 시작합니다.\n 플레이어의 이름을 입력해주세요.】");
+            Console.WriteLine("【새로운 게임을 시작합니다.】\n【플레이어의 이름을 입력해주세요.】");
             Console.Write("이름: ");
             string name = Console.ReadLine(); //이름 입력
             Console.WriteLine("============================================");
-            Console.WriteLine("【직업을 선택해주세요.\n 1. 전사\n 2. 마법사\n 3. 궁수】");
+            Console.WriteLine("【직업을 선택해주세요.】\n 1. 전사\n 2. 마법사\n 3. 궁수");
             Console.Write("직업: ");
             //번호에 따라 맞는 직업을 job에 입력, enum 사용
             Job job = (Job)Enum.Parse(typeof(Job), Console.ReadLine());
