@@ -837,7 +837,7 @@ namespace TextRpgVER2
             });
 
             Console.WriteLine(" ");
-            Console.WriteLine("============================================");
+            Console.WriteLine("=============================================");
             Console.WriteLine("【행동을 선택해주세요.】");
             Console.WriteLine("1. 장비관리");
             Console.WriteLine("2. 일기장");
@@ -1312,10 +1312,12 @@ namespace TextRpgVER2
                         Console.WriteLine("여관 주인: 편히 쉬어.");
                         player.Gold -= 500; //골드 차감
                         player.Hp = 100; //체력 회복
-                        Console.WriteLine($"{player.Name}의 체력이 회복되었습니다.");
+                        Console.WriteLine($"【{player.Name}의 체력이 회복되었습니다.】");
                         Console.WriteLine("========================================");
                         Console.WriteLine($"【 {player.Name}님의 골드:  {player.Gold} G】");
                         Console.WriteLine("========================================");
+                        Console.WriteLine($"게임이 저장되었습니다.");
+                        SaveGame(player); //게임 저장
                         Clear();
                         Tarvern();
                     }
