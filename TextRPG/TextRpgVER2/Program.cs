@@ -149,11 +149,11 @@ namespace TextRpgVER2
                         Console.WriteLine("언젠가 다른 모험가의 꿈으로, 발자취로 이어질 것이다.");
                         Console.WriteLine("========================================");
 
-                        Console.WriteLine("게임을 종료합니다.");
+                        Console.WriteLine("【게임을 종료합니다.】");
                         Environment.Exit(0);
                         break;
                     default:
-                        Console.WriteLine("잘못된 입력입니다.");
+                        Console.WriteLine("【잘못된 입력입니다.】");
                         GameOver();
                         break;
                 }
@@ -416,6 +416,7 @@ namespace TextRpgVER2
                 {
                     Console.WriteLine("여관 주인: 만들어줄 순 있는데, 이 돈으로는 부족한 걸.");
                     Console.WriteLine("여관 주인: 다음에 와서 사 먹고 가.");
+
                     Tarvern(); //여관으로 이동
                 }
 
@@ -430,82 +431,82 @@ namespace TextRpgVER2
                 [System.Text.Json.Serialization.JsonIgnore]
                 public static List<Item> itemList_Warrior = new List<Item>()
                 {
-                new Item("[ ]","수련자 갑옷", "수련에 도움을 주는 갑옷입니다.", 1200, 0, 6),
-                new Item("[ ]","무쇠갑옷", "무쇠로 만들어져 튼튼한 갑옷입니다.", 2000, 0, 10),
-                new Item("[ ]","스파르타의 갑옷", "스파르타 전사들이 입던 갑옷입니다.", 4000, 0, 17),
-                new Item("[ ]","낡은 검", "쉽게 볼 수 있는 낡은 검입니다.", 600, 2, 0),
-                new Item("[ ]","청동 도끼", "청동으로 만들어진 도끼입니다.", 1500, 4, 1),
-                new Item("[ ]","스파르타의 창", "스파르타 전사들이 사용하던 창입니다.", 2500, 7, 2)
+                    new Item("[ ]","수련자 갑옷", "수련에 도움을 주는 갑옷입니다.", 1200, 0, 6),
+                    new Item("[ ]","무쇠갑옷", "무쇠로 만들어져 튼튼한 갑옷입니다.", 2000, 0, 10),
+                    new Item("[ ]","스파르타의 갑옷", "스파르타 전사들이 입던 갑옷입니다.", 4000, 0, 17),
+                    new Item("[ ]","낡은 검", "쉽게 볼 수 있는 낡은 검입니다.", 600, 2, 0),
+                    new Item("[ ]","청동 도끼", "청동으로 만들어진 도끼입니다.", 1500, 4, 1),
+                    new Item("[ ]","스파르타의 창", "스파르타 전사들이 사용하던 창입니다.", 2500, 7, 2)
                 };
 
                 [System.Text.Json.Serialization.JsonIgnore]
                 public static List<Item> itemList_Wizard = new List<Item>()
                 {
-                new Item("[ ]","수련자의 로브", "견습 마법사들이 입는 로브입니다.", 1000, 2, 3),
-                new Item("[ ]","마법사의 로브", "마법사들이 입는 로브입니다.", 1800, 4, 5),
-                new Item("[ ]","드루이드의 로브", "드루이드들이 입던 로브입니다.", 3500, 6, 9),
-                new Item("[ ]","낡은 완드", "쉽게 볼 수 있는 낡은 완드입니다.", 900, 3, 0),
-                new Item("[ ]","의식용 완드", "청동으로 만들어진 지팡이입니다.", 1800, 6, 0),
-                new Item("[ ]","드루이드의 스태프", "드루이드들이 사용하던 스태프입니다.", 3500, 11, 0)
+                    new Item("[ ]","수련자의 로브", "견습 마법사들이 입는 로브입니다.", 1000, 2, 3),
+                    new Item("[ ]","마법사의 로브", "마법사들이 입는 로브입니다.", 1800, 4, 5),
+                    new Item("[ ]","드루이드의 로브", "드루이드들이 입던 로브입니다.", 3500, 6, 9),
+                    new Item("[ ]","낡은 완드", "쉽게 볼 수 있는 낡은 완드입니다.", 900, 3, 0),
+                    new Item("[ ]","의식용 완드", "청동으로 만들어진 지팡이입니다.", 1800, 6, 0),
+                    new Item("[ ]","드루이드의 스태프", "드루이드들이 사용하던 스태프입니다.", 3500, 11, 0)
                 };
 
                 [System.Text.Json.Serialization.JsonIgnore]
                 public static List<Item> itemList_Archer = new List<Item>()
-            {
-                new Item("[ ]","수련자의 경갑", "견습 궁수들이 입는 경갑옷입니다.", 1000, 0, 5),
-                new Item("[ ]","궁수의 경갑", "궁수들이 입는 경갑옷입니다.", 1800, 0, 9),
-                new Item("[ ]","크레타의 경갑", "크레타 궁수들이 입던 경갑입니다.", 4000, 2, 15),
-                new Item("[ ]","낡은 활", "쉽게 볼 수 있는 낡은 활입니다.", 600, 2, 0),
-                new Item("[ ]","청동 활", "청동으로 만들어진 활입니다.", 1500, 5, 0),
-                new Item("[ ]","크레타의 활", "크레타 궁수들이 사용하던 활입니다.", 3500, 7, 4)
-            };
+                {
+                    new Item("[ ]","수련자의 경갑", "견습 궁수들이 입는 경갑옷입니다.", 1000, 0, 5),
+                    new Item("[ ]","궁수의 경갑", "궁수들이 입는 경갑옷입니다.", 1800, 0, 9),
+                    new Item("[ ]","크레타의 경갑", "크레타 궁수들이 입던 경갑입니다.", 4000, 2, 15),
+                    new Item("[ ]","낡은 활", "쉽게 볼 수 있는 낡은 활입니다.", 600, 2, 0),
+                    new Item("[ ]","청동 활", "청동으로 만들어진 활입니다.", 1500, 5, 0),
+                    new Item("[ ]","크레타의 활", "크레타 궁수들이 사용하던 활입니다.", 3500, 7, 4)
+                };
 
                 //특별상점 아이템 리스트 전사-마법사-궁수
                 [System.Text.Json.Serialization.JsonIgnore]
                 public static List<Item> specialItemList_Warrior = new List<Item>()
-            {
-                new Item("[ ]","용맹의 갑옷", "전투 중 집중력을 높여 방어력을 강화하는 갑옷입니다.", 4500, 0, 21),
-                new Item("[ ]","기사 갑옷", "기사들이 입는 튼튼한 갑옷입니다.", 10000, 0, 40),
-                new Item("[ ]","황금 갑옷", "황금으로 만들어진 갑옷입니다. 실전에서 사용하긴 힘듭니다.", 50000, 0, 5),
-                new Item("[ ]","기사 검방패", "기사들이 사용하는 검과 방패입니다.", 10000, 21, 15),
-                new Item("[ ]","세계수의 도끼", "세계수로 만든 도끼로, 공격력도 뛰어납니다.", 20000, 50, 22),
-                new Item("[ ]","황금 검", "황금으로 만들어진 검입니다. 실전에서 사용하긴 힘듭니다.", 100000, 5, 0),
-            };
+                {
+                    new Item("[ ]","용맹의 갑옷", "전투 중 집중력을 높여 방어력을 강화하는 갑옷입니다.", 4500, 0, 21),
+                    new Item("[ ]","기사 갑옷", "기사들이 입는 튼튼한 갑옷입니다.", 10000, 0, 40),
+                    new Item("[ ]","황금 갑옷", "황금으로 만들어진 갑옷입니다. 실전에서 사용하긴 힘듭니다.", 50000, 0, 5),
+                    new Item("[ ]","기사 검방패", "기사들이 사용하는 검과 방패입니다.", 10000, 21, 15),
+                    new Item("[ ]","세계수의 도끼", "세계수로 만든 도끼로, 공격력도 뛰어납니다.", 20000, 50, 22),
+                    new Item("[ ]","황금 검", "황금으로 만들어진 검입니다. 실전에서 사용하긴 힘듭니다.", 100000, 5, 0),
+                };
 
 
                 [System.Text.Json.Serialization.JsonIgnore]
                 public static List<Item> specialItemList_Wizard = new List<Item>()
-            {
-                new Item("[ ]","지식의 로브", "선인들의 지식을 전수 받을 수 있는 로브입니다.", 4500, 7, 14),
-                new Item("[ ]","현인의 로브", "현인들이 입는 로브입니다.", 10000, 15, 25),
-                new Item("[ ]","황금 로브", "황금으로 만들어진 로브입니다. 실전에서 사용하긴 힘듭니다.", 50000, 0, 5),
-                new Item("[ ]","현인의 스태프", "현인들이 사용하는 스태프입니다.", 10000, 36, 0),
-                new Item("[ ]","세계수의 스태프", "세계수로 만든 스태프입니다. 공격력도 뛰어납니다.", 20000, 70, 2),
-                new Item("[ ]","황금 완드", "황금으로 만들어진 완드입니다. 실전에서 사용하긴 힘듭니다.", 100000, 5, 0)
-            };
+                {
+                    new Item("[ ]","지식의 로브", "선인들의 지식을 전수 받을 수 있는 로브입니다.", 4500, 7, 14),
+                    new Item("[ ]","현인의 로브", "현인들이 입는 로브입니다.", 10000, 15, 25),
+                    new Item("[ ]","황금 로브", "황금으로 만들어진 로브입니다. 실전에서 사용하긴 힘듭니다.", 50000, 0, 5),
+                    new Item("[ ]","현인의 스태프", "현인들이 사용하는 스태프입니다.", 10000, 36, 0),
+                    new Item("[ ]","세계수의 스태프", "세계수로 만든 스태프입니다. 공격력도 뛰어납니다.", 20000, 70, 2),
+                    new Item("[ ]","황금 완드", "황금으로 만들어진 완드입니다. 실전에서 사용하긴 힘듭니다.", 100000, 5, 0)
+                };
 
 
                 [System.Text.Json.Serialization.JsonIgnore]
                 public static List<Item> specialItemList_Archer = new List<Item>()
-            {
-                new Item("[ ]","명중의 경갑", "정확한 조준을 도와주는 경갑입니다.", 4500, 4, 17),
-                new Item("[ ]","명궁 경갑", "명궁들이 입는 튼튼한 경갑입니다.", 10000, 10, 30),
-                new Item("[ ]","황금 경갑", "황금으로 만들어진 경갑입니다. 실전에서 사용하긴 힘듭니다.", 50000, 0, 5),
-                new Item("[ ]","명중의 활", "정확한 조준을 도와주는 활입니다.", 10000, 31, 5),
-                new Item("[ ]","세계수의 활", "세계수로 만든 활로, 공격력도 뛰어납니다.", 20000, 60, 12),
-                new Item("[ ]","황금 활", "황금으로 만들어진 활입니다. 실전에서 사용하긴 힘듭니다.", 100000, 5, 0)
-            };
+                {
+                    new Item("[ ]","명중의 경갑", "정확한 조준을 도와주는 경갑입니다.", 4500, 4, 17),
+                    new Item("[ ]","명궁 경갑", "명궁들이 입는 튼튼한 경갑입니다.", 10000, 10, 30),
+                    new Item("[ ]","황금 경갑", "황금으로 만들어진 경갑입니다. 실전에서 사용하긴 힘듭니다.", 50000, 0, 5),
+                    new Item("[ ]","명중의 활", "정확한 조준을 도와주는 활입니다.", 10000, 31, 5),
+                    new Item("[ ]","세계수의 활", "세계수로 만든 활로, 공격력도 뛰어납니다.", 20000, 60, 12),
+                    new Item("[ ]","황금 활", "황금으로 만들어진 활입니다. 실전에서 사용하긴 힘듭니다.", 100000, 5, 0)
+                };
 
                 //여관 아이템-식사 리스트 attack: 회복량으로 계산 500G=100hp 
                 public static List<Item> tavernItemList = new List<Item>()
-            {
-                new Item("[ ]","염소젖","여관에서 키우는 염소의 젖입니다.", 2, 3, 0),
-                new Item("[ ]","맥주", "값싼 맥주입니다.", 10, 2, 0),
-                new Item("[ ]","와인", "특별한 날에 마시는 와인입니다.", 70, 4, 0),
-                new Item("[ ]","감자튀김","소금이 들어가 비싼 튀긴 감자입니다.", 100, 5, 0),
-                new Item("[ ]","호밀빵", "호밀로 만든 빵입니다.", 50, 10, 0),
-                new Item("[ ]","스튜","여관의 특제 스튜입니다.", 100, 20, 0),
-                new Item("[ ]","특제 스테이크","입에서 살살 녹는 스테이크입니다.", 350, 70, 0)
+                {
+                    new Item("[ ]","염소젖","여관에서 키우는 염소의 젖입니다.", 2, 3, 0),
+                    new Item("[ ]","맥주", "값싼 맥주입니다.", 10, 2, 0),
+                    new Item("[ ]","와인", "특별한 날에 마시는 와인입니다.", 70, 4, 0),
+                    new Item("[ ]","감자튀김","소금이 들어가 비싼 튀긴 감자입니다.", 100, 5, 0),
+                    new Item("[ ]","호밀빵", "호밀로 만든 빵입니다.", 50, 10, 0),
+                    new Item("[ ]","스튜","여관의 특제 스튜입니다.", 100, 20, 0),
+                    new Item("[ ]","특제 스테이크","입에서 살살 녹는 스테이크입니다.", 350, 70, 0)
                 };
 
             }
@@ -646,9 +647,11 @@ namespace TextRpgVER2
         static void Main(string[] args)
         {
             //시작 화면
+            Console.WriteLine("============================================");
             Console.WriteLine("1. 새로하기");
             Console.WriteLine("2. 불러오기");
             Console.WriteLine("3. 종료");
+            Console.WriteLine("============================================");
 
             int select = int.Parse(Console.ReadLine());
             switch (select)
@@ -769,11 +772,11 @@ namespace TextRpgVER2
                     DungeonStart();
                     break;
                 case 0:
-                    Console.WriteLine("게임을 종료합니다.");
+                    Console.WriteLine("【게임을 종료합니다.】");
                     Environment.Exit(0);
                     break;
                 default:
-                    Console.WriteLine("잘못된 입력입니다.");
+                    Console.WriteLine("【잘못된 입력입니다.】");
                     Clear();
                     GameStart(player);
                     break;
@@ -785,9 +788,9 @@ namespace TextRpgVER2
             //플레이어 스탯 반영
             //장비 착용 시 공격력, 방어력 증가를 표시함 (공격력 7 장비를 장비시, 기본값+장비보정치 (+장비보정치)로 표시)
 
-            Console.WriteLine($"{player.Name}님의 현재 상태입니다.");
+            Console.WriteLine($"【{player.Name}님의 현재 상태입니다.】");
             Console.WriteLine("===================Status===================");
-            Console.WriteLine("============================================");
+
             Console.WriteLine($"이름: {player.Name}");
             Console.WriteLine($"레벨: {player.Level}");
             Console.WriteLine($"직업: {player.Job}");
@@ -813,7 +816,7 @@ namespace TextRpgVER2
                     GameStart(player);
                     break;
                 default:
-                    Console.WriteLine("잘못된 입력입니다.");
+                    Console.WriteLine("【잘못된 입력입니다.】");
                     Clear();
                     Status(player);
                     break;
@@ -876,7 +879,6 @@ namespace TextRpgVER2
             //장비 관리 시 넘버링을 함께 확인
             Console.WriteLine("【장착할 아이템을 선택해주세요.】");
             Console.WriteLine("=================Equip=================");
-            Console.WriteLine("=======================================");
             int index = 1; //아이템 리스트 넘버링
 
             //reciptItem에서 장착할 아이템을 선택
@@ -886,6 +888,8 @@ namespace TextRpgVER2
             });
 
             Console.WriteLine(" ");
+            Console.WriteLine("=======================================");
+            Console.WriteLine("【행동을 선택해주세요.】");
             Console.WriteLine("0. 나가기");
             Console.Write("입력: ");
             int Eselect = int.Parse(Console.ReadLine());
@@ -934,7 +938,7 @@ namespace TextRpgVER2
                 Console.WriteLine("상점 주인: 오늘 모험은 어땠는가?");
             }
             Console.WriteLine("=======================================");
-            Console.WriteLine($"{player.Name}님의 골드: {player.Gold}G");
+            Console.WriteLine($"【{player.Name}님의 골드: {player.Gold}G】");
             Console.WriteLine("=======================================");
 
             Console.WriteLine("=================Store=================");
@@ -975,6 +979,7 @@ namespace TextRpgVER2
             switch (Sselect)
             {
                 case "1":
+                    Clear();
                     ItemPurchase(player);
                     break;
                 case "2":
@@ -1010,14 +1015,14 @@ namespace TextRpgVER2
         }
         static void ItemPurchase(Player player)
         {
-            Console.WriteLine("========================================");
+            Console.WriteLine("=======================================");
             Console.WriteLine($"{player.Name}님의 골드: {player.Gold}G");
-            Console.WriteLine("========================================");
+            Console.WriteLine("=======================================");
             Console.WriteLine("\n");
             Console.WriteLine($"상점 주인: 자, 자, 원하는 걸 골라봐.");
 
 
-            Console.WriteLine("==Buy==");
+            Console.WriteLine("==================Buy==================");
 
 
             int index = 1; //아이템 리스트 넘버링
@@ -1044,6 +1049,7 @@ namespace TextRpgVER2
             }
 
             //넘버링을 통해 구매할 아이템 선택, 구매처리
+            Console.WriteLine("=======================================");
             Console.WriteLine("【구매할 아이템을 선택해주세요.】");
             Console.WriteLine(" ");
             Console.WriteLine("0. 나가기\n ");
@@ -1090,11 +1096,12 @@ namespace TextRpgVER2
         static void ItemSell(Player player)
         {
             Console.WriteLine("========================================");
-            Console.WriteLine($"{player.Name}님의 골드: {player.Gold}G");
+            Console.WriteLine($"【{player.Name}님의 골드: {player.Gold}G】");
             Console.WriteLine("========================================");
             Console.WriteLine("  \n");
             Console.WriteLine($"상점 주인: 뭔가 팔 물건이라도 있나?");
-            Console.WriteLine("==Sell==");
+            Console.WriteLine("  \n");
+            Console.WriteLine("==================Sell==================");
 
             int index = 1; //아이템 리스트 넘버링
 
@@ -1104,7 +1111,7 @@ namespace TextRpgVER2
             {
                 Console.WriteLine($"{index++}. {item.EquipItem} {item.Name} \t| 공격력 +{item.Attack} \t| 방어력 +{item.Defense} \t|{item.Description}\t|가격: {item.GetPrice * 0.8}G");
             });
-
+            Console.WriteLine("========================================");
             Console.WriteLine("【판매할 아이템을 선택해주세요.】");
             Console.WriteLine("0. 나가기\n ");
 
@@ -1118,12 +1125,12 @@ namespace TextRpgVER2
             else if (Sellselect > 0 && Sellselect <= player.reciptItem.Count)
             {
                 Console.WriteLine($"상점주인: 그 물건은 {player.reciptItem[Sellselect - 1].GetPrice * 0.8}G에 사지. 팔텐가?");
-                Console.WriteLine("판매하시겠습니까? (Y/N)");
+                Console.WriteLine("【판매하시겠습니까? (Y/N)】");
                 player.reciptItem[Sellselect - 1].Sell(); //판매 메서드 호출
             }
             else
             {
-                Console.WriteLine("잘못된 입력입니다.");
+                Console.WriteLine("【잘못된 입력입니다.】");
                 Clear();
                 ItemSell(player);
             }
@@ -1132,12 +1139,13 @@ namespace TextRpgVER2
 
         static void SpecialStore()
         {
-            Console.WriteLine("========================================");
+            Console.WriteLine("=======================================");
             Console.WriteLine($"{player.Name}님의 골드: {player.Gold}G");
-            Console.WriteLine("========================================");  
-            Console.WriteLine("  \n");
+            Console.WriteLine("=======================================");  
+            Console.WriteLine("  ");
             Console.WriteLine($"상점 주인: 이거 아무한테나 보여주는 물건이 아니야.");
-            Console.WriteLine("==Buy==");
+            Console.WriteLine(" ");
+            Console.WriteLine("==================Buy==================");
 
             int index = 1; //아이템 리스트 넘버링
             if (Job.전사.ToString() == player.Job)
@@ -1161,8 +1169,8 @@ namespace TextRpgVER2
                     Console.WriteLine($"{index++}. {item.Name} \t| 공격력 +{item.Attack} \t| 방어력 +{item.Defense} \t|{item.Description}\t|가격: {item.Price}");
                 });
             }
-            Console.WriteLine("구매할 아이템을 선택해주세요.");
-            Console.WriteLine(" ");
+            Console.WriteLine("=======================================");
+            Console.WriteLine("【구매할 아이템을 선택해주세요.】");
             Console.WriteLine("0. 나가기\n ");
             Console.Write("입력:");
             int select = int.Parse(Console.ReadLine());
@@ -1188,14 +1196,14 @@ namespace TextRpgVER2
                 }
                 else
                 {
-                    Console.WriteLine("잘못된 입력입니다.");
+                    Console.WriteLine("【잘못된 입력입니다.】");
                     Clear();
                     ItemPurchase(player);
                 }
             }
             else
             {
-                Console.WriteLine("잘못된 입력입니다.");
+                Console.WriteLine("【잘못된 입력입니다.】");
                 Clear();
                 SpecialStore();
             }
@@ -1209,11 +1217,10 @@ namespace TextRpgVER2
             Console.WriteLine("직원: 숙박하실건가요? 아니면 식사가 필요하신가요?");
             Console.WriteLine(" ");
             Console.WriteLine("=================Tavern=================");
-            Console.WriteLine("========================================");
             Console.WriteLine("1. 식사 주문");
             Console.WriteLine("2. 휴식/숙박");
-            Console.WriteLine(" ");
-            Console.WriteLine("원하는 행동을 선택해주세요.");
+            Console.WriteLine("========================================");
+            Console.WriteLine("【원하는 행동을 선택해주세요.】");
             Console.WriteLine("0. 나가기\n ");
             Console.Write("입력: ");
             int select = int.Parse(Console.ReadLine());
@@ -1234,7 +1241,7 @@ namespace TextRpgVER2
                     GameStart(player);
                     break;
                 default:
-                    Console.WriteLine("잘못된 입력입니다.");
+                    Console.WriteLine("【잘못된 입력입니다.】");
                     Tarvern();
                     break;
             }
@@ -1244,22 +1251,23 @@ namespace TextRpgVER2
         //식사 주문
         static void Meal()
         {
-            Console.WriteLine("=======================================");
-            Console.WriteLine($"{player.Name}님의 골드: {player.Gold}G");
-            Console.WriteLine("=======================================");            
+            Console.WriteLine("========================================");
+            Console.WriteLine($"【{player.Name}님의 골드: {player.Gold}G】");
+            Console.WriteLine("========================================");            
             Console.WriteLine("여관 주인: 메뉴가 정해지면 말해줘.");
-            Console.WriteLine("==Menu==");
+            Console.WriteLine("==================Menu==================");
             //아이템 리스트
 
             int index = 1;
 
             Item.ItemList.tavernItemList.ForEach(item =>
             {
-                Console.WriteLine($"{index++}.{item.Name} \t| 체력 회복량: {item.Attack} \t| 가격: {item.Price}");
+                Console.WriteLine($"{index++}.{item.Name} \t|회복량: {item.Attack} \t|가격: {item.Price}");
             });
 
             Console.WriteLine(" ");
-            Console.WriteLine("원하는 행동을 선택해주세요.");
+            Console.WriteLine("========================================");
+            Console.WriteLine("【원하는 행동을 선택해주세요.】");
             Console.WriteLine("0. 나가기\n ");
             Console.Write("입력: ");
 
@@ -1277,7 +1285,7 @@ namespace TextRpgVER2
             }
             else
             {
-                Console.WriteLine("잘못된 입력입니다.");
+                Console.WriteLine("【잘못된 입력입니다.】");
                 Clear();
                 Meal();
             }
@@ -1290,7 +1298,7 @@ namespace TextRpgVER2
         {
             Console.WriteLine("여관 주인: 방은 500G야.");
             Console.WriteLine("=======================================");
-            Console.WriteLine($"{player.Name}님의 골드: {player.Gold}G");
+            Console.WriteLine($"【{player.Name}님의 골드: {player.Gold}G】");
             Console.WriteLine("=======================================");
             Console.WriteLine("여관 주인: 방 하나 내어줄까?(Y/N)");
             string answer = Console.ReadLine();
@@ -1305,9 +1313,9 @@ namespace TextRpgVER2
                         player.Gold -= 500; //골드 차감
                         player.Hp = 100; //체력 회복
                         Console.WriteLine($"{player.Name}의 체력이 회복되었습니다.");
-                        Console.WriteLine("=======================================");
-                        Console.WriteLine($"{player.Name}님의 골드: {player.Gold}G");
-                        Console.WriteLine("=======================================");
+                        Console.WriteLine("========================================");
+                        Console.WriteLine($"【 {player.Name}님의 골드:  {player.Gold} G】");
+                        Console.WriteLine("========================================");
                         Clear();
                         Tarvern();
                     }
@@ -1336,7 +1344,6 @@ namespace TextRpgVER2
         //던전 입장
         static void DungeonStart()
         {
-            Console.WriteLine("============================================");
             Console.WriteLine("그린티 마을 뒷편에는, 각종 던전으로 향할 수 있는 포탈이 있다.");
             Console.WriteLine("여러 모험가들이 던전으로 향하고, 돌아오고 있다.");
             Console.WriteLine("그린티 마을에서는 총 다섯 곳의 던전을 들어갈 수 있다.");
@@ -1347,7 +1354,8 @@ namespace TextRpgVER2
             Console.WriteLine("독특한 식물이 드리운 신비의 숲, \n 마지막으로 실패한 마법생물로 가득 찬 마굴이 있다.");
 
             Console.WriteLine(" ");
-            Console.WriteLine("==Dungeon==");
+            Console.WriteLine("=======================================");
+            Console.WriteLine("================Dungeon================");
             int index = 1; //던전 리스트 넘버링
 
             //리스트 형태로 출력
@@ -1356,9 +1364,9 @@ namespace TextRpgVER2
                 Console.WriteLine($"{index++}. {dungeon.name} \t| 권장 방어력: {dungeon.recommendDefense}");
             });
 
-            Console.WriteLine("======================================");
+            Console.WriteLine("=======================================");
+            Console.WriteLine("【원하는 행동을 선택해주세요.】");
             Console.WriteLine("0. 나가기\n ");
-            Console.WriteLine("원하는 행동을 선택해주세요.");
             Console.Write("입력: ");
 
             int select = int.Parse(Console.ReadLine());
@@ -1366,7 +1374,7 @@ namespace TextRpgVER2
             switch (select)
             {
                 case 1:
-                    Console.WriteLine("==평원 던전==");
+                    Console.WriteLine("===============평원 던전================");
                     Console.WriteLine("던전의 입구는 넓고, 바람이 시원하게 불어온다.");
                     Console.WriteLine("던전의 깊은 곳에서 괴물들의 울음소리가 들린다.");
                     Console.WriteLine(" ");
@@ -1378,7 +1386,8 @@ namespace TextRpgVER2
                     break;
 
                 case 2:
-                    Console.WriteLine("==바위산 던전==");
+                    Console.WriteLine("=======================================");
+                    Console.WriteLine("==============바위산 던전==============");
                     Console.WriteLine("바위산은 좁고, 어두운 통로가 이어져 있다.");
                     Console.WriteLine("바위산의 깊은 곳에서 괴물들의 울음소리가 울려온다.");
                     Console.WriteLine(" ");
@@ -1389,7 +1398,7 @@ namespace TextRpgVER2
                     Dungeon.dungeonList[1].DungeonClear(); //던전 공략 실행 메서드 호출
                     break;
                 case 3:
-                    Console.WriteLine("==화산 던전==");
+                    Console.WriteLine("================화산 던전================");
                     Console.WriteLine("태동하는 화산의 입구에서는 뜨거운 열기가 느껴진다.");
                     Console.WriteLine("화산의 깊은 곳에서 들려오는 괴물들의 울음소리가 들린다.");
                     Console.WriteLine(" ");
@@ -1400,7 +1409,7 @@ namespace TextRpgVER2
                     Dungeon.dungeonList[2].DungeonClear(); //던전 공략 실행 메서드 호출
                     break;
                 case 4:
-                    Console.WriteLine("==신비의 숲==");
+                    Console.WriteLine("================신비의 숲================");
                     Console.WriteLine("신비의 숲은 신비로운 식물들이 가득하다.");
                     Console.WriteLine("신비의 숲의 깊은 곳에서 괴물들의 울음소리가 들린다.");
                     Console.WriteLine(" ");
@@ -1411,8 +1420,9 @@ namespace TextRpgVER2
                     Dungeon.dungeonList[3].DungeonClear(); //던전 공략 실행 메서드 호출
                     break;
                 case 5:
-                    Console.WriteLine("==마굴==");
-                    Console.WriteLine("마굴은 폐허가 된 탑을 의미한다.");
+                    Console.WriteLine("========================================");
+                    Console.WriteLine("==================마굴==================");
+                    Console.WriteLine("과거의 찬란한 위상을 잃고, 폐허가 된 탑, 마굴.");
                     Console.WriteLine("마굴의 깊은 곳에서 버려진 마법 생물들의 울음소리가 들린다.");
                     Console.WriteLine(" ");
                     Console.WriteLine("마굴의 마법생물들은 고대 실험의 실패작들이다.");
@@ -1424,7 +1434,7 @@ namespace TextRpgVER2
 
 
                 case 0:
-                    Console.WriteLine("다시 마을로 돌아갑니다.");
+                    Console.WriteLine("【다시 마을로 돌아갑니다.】");
                     GameStart(player);
                     break;
             }
@@ -1448,7 +1458,7 @@ namespace TextRpgVER2
 
             string json = JsonSerializer.Serialize(player, options);
             File.WriteAllText("savegame.json", json);
-            Console.WriteLine("게임이 저장되었습니다.");
+            Console.WriteLine("【게임이 저장되었습니다.】");
         }
 
         //게임 불러오기
@@ -1466,7 +1476,7 @@ namespace TextRpgVER2
 
                 return JsonSerializer.Deserialize<Player>(saveData, options);
             }
-            Console.WriteLine("저장된 게임이 없습니다.");
+            Console.WriteLine("【저장된 게임이 없습니다.】");
             
             StartNewGame();
             return null;
