@@ -356,3 +356,21 @@ DungeonStart(); //던전 공략 후 던전으로 이동
           Console.WriteLine($"{index++}. {item.Name} \t| 공격력 +{item.Attack} \t| 방어력 +{item.Defense} \t|{item.Description}\t|가격: {item.Price}");
       });
   }
+  
+              switch (select)
+            {
+                case 1:
+                    Tarvern(); //구현 전까지는 여관으로 돌아감
+                    break;
+                case 2:
+                    Tarvern();
+                    break;
+                case 0:
+                    Console.WriteLine("여관 주인: 마음이 바뀐거야?");
+                    Tarvern();
+                    break;
+                default:
+                    Console.WriteLine("잘못된 입력입니다.");
+                    Meal();
+                    break;
+            }
