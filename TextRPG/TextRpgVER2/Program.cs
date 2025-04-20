@@ -315,7 +315,7 @@ namespace TextRpgVER2
                             break;
                         case "N":
                             Console.WriteLine("상점 주인: 뭐야, 그만 둘건가?");
-                            Console.WriteLine($"{Name}은(는) 판매되지 않았습니다.");
+                            Console.WriteLine($"【{Name}은(는) 판매되지 않았습니다.】");
                             ItemSell(player);
                             break;
                         default:
@@ -328,7 +328,7 @@ namespace TextRpgVER2
                 {
                     //정상적인 플레이에서는 이 조건이 발생하지 않음.
                     Console.WriteLine("상점 주인: 그 물건은 안 살 거야. 다른 데 알아보라고.");
-                    Console.WriteLine($"{Name}은(는) 판매할 수 없습니다.");
+                    Console.WriteLine($"【{Name}은(는) 판매할 수 없습니다.】");
                 }
                 ItemSell(player); //판매 후 상점-판매로 이동
 
@@ -339,7 +339,7 @@ namespace TextRpgVER2
             {
                 if (SoldOut && !Equipped)
                 {
-                    Console.WriteLine($"{Name}을(를) 장착하였습니다.");
+                    Console.WriteLine($"【{Name}을(를) 장착하였습니다.】");
                     //플레이어의 아이템 공격력과 방어력 증가
                     player.ItemAttack += Attack;
                     player.ItemDefense += Defense;
@@ -351,7 +351,7 @@ namespace TextRpgVER2
                 }
                 else if (Equipped)
                 {
-                    Console.WriteLine($"{Name}의 장착을 해제하였습니다.");
+                    Console.WriteLine($"【{Name}의 장착을 해제하였습니다.】");
 
                     //플레이어의 공격력과 방어력 감소
                     player.ItemAttack -= Attack;
@@ -363,6 +363,62 @@ namespace TextRpgVER2
                 }
                 Equipment(); //장착 후 장비관리로 이동
             }
+
+            //여관 아이템 구매 메서드
+            public void Order()
+            {
+                if (player.Gold >= GetPrice)
+                {
+                    Console.WriteLine("여관 주인: 어때, 맛있어보이지?");
+                    Console.WriteLine($"【 {Name}을(를) 주문하였습니다.】");
+                    player.Gold -= GetPrice; //구매 후 골드 감소
+                    int MaxRecover = 100 - player.Hp; //최대 체력에서 현재 체력을 뺀 값
+                    player.Hp += Attack; //체력 회복
+                    if (player.Hp > 100) //체력이 100을 넘지 않도록 설정
+                    {
+                        player.Hp = 100;
+                        Console.WriteLine($"【체력이 {MaxRecover} 회복되었습니다.】");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"【체력이 {Attack} 회복되었습니다.】");
+                    }
+
+                    Console.WriteLine($"【{player.Name}님의 체력: {player.Hp}】");
+                    Console.WriteLine($"【{player.Name}님의 골드: {player.Gold}G】");
+                    Console.WriteLine("여관 주인: 더 주문할 건가?");
+                    Console.WriteLine("(Y/N)");
+                    string answer = Console.ReadLine();
+                    switch (answer)
+                    {
+                        case "Y":
+                            Console.WriteLine("여관 주인: 좋아, 메뉴판 가져올게.");
+                            Clear();
+                            Meal(); //음식 주문탭
+                            break;
+                        case "N":
+                            Console.WriteLine("여관 주인: 다음에 또 먹으러 와.");
+                            Clear();
+                            Tarvern(); //여관으로 이동
+                            break;
+                        default:
+                            Console.WriteLine("【잘못된 입력입니다.】");
+                            Clear();
+                            Tarvern(); //여관으로 이동
+                            break;
+                    }
+
+
+                }
+                else
+                {
+                    Console.WriteLine("여관 주인: 만들어줄 순 있는데, 이 돈으로는 부족한 걸.");
+                    Console.WriteLine("여관 주인: 다음에 와서 사 먹고 가.");
+                    Tarvern(); //여관으로 이동
+                }
+
+            }
+
 
             //아이템 리스트 집합
 
@@ -451,12 +507,6 @@ namespace TextRpgVER2
                 };
 
             }
-
-
-
-
-
-
 
         }
 
@@ -1141,7 +1191,8 @@ namespace TextRpgVER2
         //여관
         static void Tarvern()
         {
-            Console.WriteLine("여관설명");
+            Console.WriteLine("여관의 1층은 식당, 2층은 객실로 구성되어있다.\n여관에는 수많은 모험가들이 여행의 피로를 풀기 위하여 모여들고 있었다.");
+            Console.WriteLine("직원: 숙박하실건가요? 아니면 식사가 필요하신가요?");
             Console.WriteLine(" ");
             Console.WriteLine("==Tavern==");
             Console.WriteLine("1. 식사 주문");
@@ -1185,31 +1236,37 @@ namespace TextRpgVER2
             Console.WriteLine("==Menu==");
             //아이템 리스트
 
+            int index = 1;
+
+            Item.ItemList.tavernItemList.ForEach(item =>
+            {
+                Console.WriteLine($"{index++}.{item.Name} \t| 체력 회복량: {item.Attack} \t| 가격: {item.Price}");
+            });
+
             Console.WriteLine(" ");
             Console.WriteLine("원하는 행동을 선택해주세요.");
             Console.WriteLine("0. 나가기\n ");
             Console.Write("입력: ");
 
-
             int select = int.Parse(Console.ReadLine());
 
-            switch (select)
+            if(select == 0)
             {
-                case 1:
-                    Tarvern(); //구현 전까지는 여관으로 돌아감
-                    break;
-                case 2:
-                    Tarvern();
-                    break;
-                case 0:
-                    Console.WriteLine("여관 주인: 마음이 바뀐거야?");
-                    Tarvern();
-                    break;
-                default:
-                    Console.WriteLine("잘못된 입력입니다.");
-                    Meal();
-                    break;
+                Console.WriteLine("여관 주인: 마음이 바뀐 거야?");
+                Clear();
+                Tarvern();
             }
+            else if (select > 0 && select <= Item.ItemList.tavernItemList.Count)
+            {
+                Item.ItemList.tavernItemList[select - 1].Order(); //음식 구매 메서드 호출
+            }
+            else
+            {
+                Console.WriteLine("잘못된 입력입니다.");
+                Clear();
+                Meal();
+            }
+
 
         }
 
