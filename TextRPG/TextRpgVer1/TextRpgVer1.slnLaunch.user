@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "새 프로필",
+    "Projects": [
+      {
+        "Path": "TextRpgVer1.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "..\\TextRpgVER2\\TextRpgVER2.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

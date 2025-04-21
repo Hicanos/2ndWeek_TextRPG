@@ -1,0 +1,54 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\GitHub\\2ndWeek_TextRPG\\FirstWeek\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{D7DA888E-12F1-45F8-96BF-C86E6B0BF1AD}|SecondProject\\SecondProject.csproj|d:\\github\\2ndweek_textrpg\\firstweek\\secondproject\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D7DA888E-12F1-45F8-96BF-C86E6B0BF1AD}|SecondProject\\SecondProject.csproj|solutionrelative:secondproject\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D8624434-733D-483B-AA05-5F66D3C3C647}|ConsoleApp1\\ConsoleApp1.csproj|d:\\github\\2ndweek_textrpg\\firstweek\\consoleapp1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D8624434-733D-483B-AA05-5F66D3C3C647}|ConsoleApp1\\ConsoleApp1.csproj|solutionrelative:consoleapp1\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\GitHub\\2ndWeek_TextRPG\\FirstWeek\\ConsoleApp1\\Program.cs",
+              "RelativeDocumentMoniker": "ConsoleApp1\\Program.cs",
+              "ToolTip": "D:\\GitHub\\2ndWeek_TextRPG\\FirstWeek\\ConsoleApp1\\Program.cs",
+              "RelativeToolTip": "ConsoleApp1\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-20T06:55:09.029Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\GitHub\\2ndWeek_TextRPG\\FirstWeek\\SecondProject\\Program.cs",
+              "RelativeDocumentMoniker": "SecondProject\\Program.cs",
+              "ToolTip": "D:\\GitHub\\2ndWeek_TextRPG\\FirstWeek\\SecondProject\\Program.cs",
+              "RelativeToolTip": "SecondProject\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-14T07:32:40.413Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
